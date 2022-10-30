@@ -1,0 +1,107 @@
+@import '../../styles/colors';
+@import '../../styles/funcs';
+.header {
+    background-color: #fff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+    border-radius: 0px 0px 8px 8px;
+    &__nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 17px 0;
+    }
+    &__left {
+        display: flex;
+        column-gap: 44px;
+    }
+    &__right {
+        display: flex;
+        column-gap: 55px;
+    }
+    &__icons {
+        display: flex;
+        align-items: center;
+        list-style-type: none;
+        column-gap: 25px;
+    }
+    &__icon {
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+    }
+    &__cla {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+    }
+    &__find-mentor {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: $main-color;
+        cursor: pointer;
+    }
+    &__change-lang {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: $main-color;
+        cursor: pointer;
+    }
+    &__alert {
+        display: block;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+    }
+    &__search {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        &-inp {
+            display: none;
+            height: 30px;
+            padding: 3px 10px;
+            border: 1px solid rgba(96, 96, 96, 1);
+            border-radius: 20px;
+        }
+    }
+    &__profile {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        & .info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            row-gap: 1px;
+        }
+        & .username {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            color: $main-color;
+        }
+        & .role {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 13px;
+            color: $main-color;
+        }
+        & .img-wrap {
+            width: 33px;
+            height: 33px;
+            border-radius: 50%;
+            & img {
+                width: 100%;
+                height: 120%;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+    }
+}
