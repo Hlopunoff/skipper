@@ -1,3 +1,4 @@
+@import './styles/colors';
 @import './styles/fonts';
 body {
   -webkit-font-smoothing: antialiased;
@@ -26,4 +27,12 @@ button {
 
 .header__search_shown {
   display: block !important;
+}
+.navbar__section{
+  text-decoration: none;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 29px;
+  color: $main-color;
 }

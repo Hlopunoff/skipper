@@ -1,0 +1,18 @@
+@import '../../styles/colors';
+.navbar {
+    margin-top: 20px;
+    &__sections {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+    }
+    &__divider {
+        display: inline-block;
+        width: 1px;
+        height: 14px;
+        background-color: #979797;
+        &:last-child {
+            display: none;
+        }
+    }
+}
