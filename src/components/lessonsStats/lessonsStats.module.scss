@@ -1,0 +1,57 @@
+@import '../../styles/colors';
+@import '../../styles/funcs';
+.table {
+    width: prc(1000, 1386);
+    background-color: #fff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+    border-radius: 8px;
+    padding: 30px 42px 54px 26px;
+    &__head {
+        padding: 10px 0 24px 0;
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        & .col__title {
+            padding-right: 5px;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 20px;
+            color: $main-color;
+        }
+    }
+    &__title {
+        padding-right: 5px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: $main-color;
+    }
+    &__body {
+        display: flex;
+        flex-direction: column;
+    }
+    &__item {
+        border-top: 1px solid #DADADA;
+        padding: 30px 0;
+        display: grid;
+        align-items: center;
+        grid-template-columns: repeat(4, 1fr);
+        & .item__amount {
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 20px;
+            color: $main-color;
+        }
+        & .item__title {
+            padding-right: 5px;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 20px;
+            color: $main-color;
+        }
+    }
+}

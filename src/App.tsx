@@ -1,7 +1,7 @@
 import {Routes, Route} from 'react-router-dom';
 
 import { Layout } from './components/layout/Layout';
-import { MentiPage } from './pages/MentiPage';
+import { MentiPage } from './pages/mentiPage/MentiPage';
 
 function App() {
   return (
