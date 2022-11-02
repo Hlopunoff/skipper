@@ -2,14 +2,14 @@ import {FC} from 'react';
 
 import st from './singleLessonStat.module.scss';
 
-interface singleLessonStatProps {
+interface SingleLessonStatProps {
     title: string;
     lastMonth: number | string;
     lastThreeMonth: number | string;
     allTime: number | string;
 }
 
-export const SingleLessonStat: FC<singleLessonStatProps> = ({title, lastMonth, lastThreeMonth, allTime}) => {
+export const SingleLessonStat: FC<SingleLessonStatProps> = ({title, lastMonth, lastThreeMonth, allTime}) => {
     return (
         <div className={st['table__item']}>
             <h3 className={st['item__title']}>{title}</h3>

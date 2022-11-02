@@ -1,0 +1,32 @@
+@import '../../styles/colors';
+.row {
+    padding: 16px 0 22px 0;
+    display: grid;
+    grid-template-columns: 1.5fr 0.5fr;
+    align-items: center;
+    border-top: 1px solid #E5E5E5;
+    &__title {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 23px;
+        color: $main-color;
+    }
+    &__subtitle {
+        display: inline-block;
+        margin-top: 5px;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 23px;
+        color: rgba($main-color, 0.63);
+    }
+    &__price {
+        text-align: center;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 23px;
+        color: $main-color;
+    }
+}

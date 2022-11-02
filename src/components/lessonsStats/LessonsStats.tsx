@@ -1,9 +1,15 @@
+import {FC} from 'react';
 import { SingleLessonStat } from '../singleLessonStat/SingleLessonStat';
 import st from './lessonsStats.module.scss';
 
-export const LessonsStats = () => {
+interface LessonsStatsProps {
+    width: string;
+    padding: string;
+}
+
+export const LessonsStats: FC<LessonsStatsProps> = ({width, padding}) => {
     return (
-        <div className={st['table']}>
+        <div className={st['table']} style={{width, padding}}>
             <div className={st['table__head']}>
                 <h2 className={st['table__title']}>Статистика занятий</h2>
                 <h3 className={st['col__title']}>Прошлый месяц</h3>

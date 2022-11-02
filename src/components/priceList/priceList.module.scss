@@ -1,0 +1,20 @@
+@import '../../styles/colors';
+.lessonsTable {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+    border-radius: 8px;
+    padding: 15px 39px 12px 25px;
+    &__title {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 20px;
+        color: $main-color;
+    }
+    &__content {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -6,6 +6,9 @@
     }
     &__info {
         width: prc(926, 1386);
+        display: flex;
+        flex-direction: column;
+        row-gap: 25px;
     }
     &__cla {
         width: prc(428, 1386);

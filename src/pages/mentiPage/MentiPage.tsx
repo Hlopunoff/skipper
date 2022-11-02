@@ -9,7 +9,7 @@ export const MentiPage = () => {
         <div className="container">
             <div className={st['mentiPage__content']}>
                 <MentorCardShort/>
-                <LessonsStats/>
+                <LessonsStats width="72%" padding="30px 42px 54px 26px"/>
                 <ProfileReport/>
             </div>
         </div>
