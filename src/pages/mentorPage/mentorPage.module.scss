@@ -1,0 +1,13 @@
+@import '../../styles/funcs';
+.mentorPage {
+    &__content {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__info {
+        width: prc(926, 1386);
+    }
+    &__cla {
+        width: prc(428, 1386);
+    }
+}

@@ -4,6 +4,7 @@ import st from './navbar.module.scss';
 const pathNamesData: any = {
     '/': 'Главная',
     menti: 'Профиль менти',
+    'mentor-page': 'Профиль ментора',
 };
 
 export const Navbar = () => {
