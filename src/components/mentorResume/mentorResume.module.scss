@@ -1,0 +1,63 @@
+@import '../../styles/colors';
+.mentorResume {
+    width: 100%;
+    & .table {
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+        border-radius: 8px;
+        padding: 10px 38px 85px 25px;
+        &__title {
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 20px;
+            color: $main-color;
+        }
+        &__headlines {
+            margin-top: 29px;
+            padding-bottom: 10px;
+            display: grid;
+            align-items: center;
+            grid-template-columns: repeat(4, 1fr);
+            border-bottom: 1px solid #DADADA;
+        }
+        &__headline {
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 23px;
+            color: rgba(44, 44, 44, 0.81);
+        }
+        &__cols {
+            margin-top: 16px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        &__col {
+            padding-right: 15px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 35px;
+        }
+        &__item {
+            display: flex;
+            flex-direction: column;
+            row-gap: 5px;
+            & .period {
+                font-style: normal;
+                font-weight: 300;
+                font-size: 16px;
+                line-height: 23px;
+                color: $main-color;
+            }
+            & .organization {
+                font-style: normal;
+                font-weight: 300;
+                font-size: 16px;
+                line-height: 23px;
+                color: $main-color;
+            }
+        }
+    }
+}
