@@ -1,4 +1,11 @@
+import {FC} from 'react';
+
 import st from './mentorResume.module.scss';
+
+interface ITableItemProps {
+    period?: string;
+    organization?: string;
+}
 
 export const MentorResume = () => {
     return (
@@ -13,33 +20,29 @@ export const MentorResume = () => {
                 </div>
                 <div className={st['table__cols']}>
                     <div className={`${st['table__col']} experience`}>
-                        <div className={st['table__item']}>
-                            <span className={st['period']}>2005 - 2010</span>
-                            <span className={st['organization']}>ОАО Сбербанк России</span>
-                        </div>
-                        <div className={st['table__item']}>
-                            <span className={st['period']}>2010 - 2020</span>
-                            <span className={st['organization']}>Собственное ИП</span>
-                        </div>
+                        <ResumeItem period='2005 - 2010' organization='ОАО Сбербанк России' key='2005-2010'/>
+                        <ResumeItem period='2010 - 2020' organization='Собственное ИП' key='2010-2020'/>
                     </div>
                     <div className={`${st['table__col']} education`}>
-                        <div className={st['table__item']}>
-                            <span className={st['period']}>2001 - 2005</span>
-                            <span className={st['organization']}>Магистр, Уральский Юридический Институт</span>
-                        </div>
+                        <ResumeItem period='2001 - 2005' organization='Магистр, Уральский Юридический Институт' key='2001 - 2005'/>
                     </div>
                     <div className={`${st['table__col']} certificates`}>
-                        <div className={st['table__item']}>
-                            <span className={st['organization']}>Сертификат юриста самой серьезной степени</span>
-                        </div>
+                        <ResumeItem organization='Сертификат юриста самой серьезной степени' key='1'/>
                     </div>
                     <div className={`${st['table__col']} other`}>
-                        <div className={st['table__item']}>
-                            <span className={st['organization']}>Место №3 во всероссийском конкурсе “Алло, мы ищем таланты”</span>
-                        </div>
+                        <ResumeItem organization='Место №3 во всероссийском конкурсе “Алло, мы ищем таланты”' key={2}/>
                     </div>
                 </div>
             </div>
         </div>
     )
+};
+
+const ResumeItem: FC<ITableItemProps> = ({period, organization}) => {
+    return (
+        <div className={st['table__item']}>
+            <span className={st['period']}>{period}</span>
+            <span className={st['organization']}>{organization}</span>
+        </div>
+    );
 };
