@@ -5,6 +5,7 @@ import { MentorResume } from '../../components/mentorResume/MentorResume';
 import { MentorReviews } from '../../components/mentorReviews/MentorReviews';
 import { ProfileReport } from '../../components/profileReport/ProfileReport';
 import { Consultation } from '../../components/consultation/Consultation';
+import { Schedule } from '../../components/schedule/Schedule';
 
 import st from './mentorPage.module.scss';
 
@@ -24,6 +25,7 @@ export const MentorPage = () => {
                     </div>
                     <div className={st['mentorPage__cla']}>
                         <Consultation/>
+                        <Schedule/>
                     </div>
                 </div>
             </div>
