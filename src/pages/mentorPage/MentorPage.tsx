@@ -3,6 +3,8 @@ import { LessonsStats } from '../../components/lessonsStats/LessonsStats';
 import { PriceList } from '../../components/priceList/PriceList';
 import { MentorResume } from '../../components/mentorResume/MentorResume';
 import { MentorReviews } from '../../components/mentorReviews/MentorReviews';
+import { ProfileReport } from '../../components/profileReport/ProfileReport';
+import { Consultation } from '../../components/consultation/Consultation';
 
 import st from './mentorPage.module.scss';
 
@@ -18,8 +20,11 @@ export const MentorPage = () => {
                         <PriceList/>
                         <MentorResume/>
                         <MentorReviews/>
+                        <ProfileReport/>
                     </div>
-                    <div className={st['mentorPage__cla']}></div>
+                    <div className={st['mentorPage__cla']}>
+                        <Consultation/>
+                    </div>
                 </div>
             </div>
         </section>

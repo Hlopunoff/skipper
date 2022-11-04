@@ -5,6 +5,7 @@
         justify-content: space-between;
     }
     &__info {
+        position: relative;
         width: prc(926, 1386);
         display: flex;
         flex-direction: column;
