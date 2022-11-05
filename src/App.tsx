@@ -3,6 +3,7 @@ import {Routes, Route} from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { MentiPage } from './pages/mentiPage/MentiPage';
 import { MentorPage } from './pages/mentorPage/MentorPage';
+import { RegisterPage } from './pages/registerPage/RegisterPage';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path='menti' element={<MentiPage/>}/>
           <Route path='mentor-page' element={<MentorPage/>}/>
         </Route>
+        <Route path='/register' element={<RegisterPage/>}/>
       </Routes>
     </>
   );

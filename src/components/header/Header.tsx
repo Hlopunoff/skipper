@@ -28,7 +28,7 @@ export const Header = () => {
             <div className="container">
                 <nav className={st['header__nav']}>
                     <div className={st['header__left']}>
-                        <Logo/>
+                        <Logo sx={{}}/>
                         <div className={st['header__icons-wrap']}>
                             <ul className={st['header__icons']}>
                                 <li className={st['header__icon']}>
