@@ -3,7 +3,8 @@ import {Routes, Route} from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { MentiPage } from './pages/mentiPage/MentiPage';
 import { MentorPage } from './pages/mentorPage/MentorPage';
-import { RegisterPage } from './pages/registerPage/RegisterPage';
+import { AuthPage } from './pages/authPage/AuthPage';
+import { LoginWithEmail, LoginWithPhone } from './components/login/Login';
 
 function App() {
   return (
@@ -13,7 +14,10 @@ function App() {
           <Route path='menti' element={<MentiPage/>}/>
           <Route path='mentor-page' element={<MentorPage/>}/>
         </Route>
-        <Route path='/register' element={<RegisterPage/>}/>
+        <Route path='/auth' element={<AuthPage/>}>
+          <Route index element={<LoginWithEmail/>}/>
+          <Route path='login-phone' element={<LoginWithPhone/>}/>
+        </Route>
       </Routes>
     </>
   );

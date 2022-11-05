@@ -2,8 +2,7 @@
 @import '../../styles/funcs';
 .form {
     position: absolute;
-    padding: 0 30px;
-    top: prc(130, 900);
+    top: 16%;
     left: 50%;
     transform: translateX(-50%);
     width: 484px;
@@ -14,10 +13,12 @@
         width: 100%;
         display: flex;
         align-items: center;
-        padding: 20px 0;
     }
-    &__with-email {
-        text-align: center;
+    &__with {
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-style: normal;
         font-weight: 700;
         font-size: 16px;
@@ -25,15 +26,17 @@
         color: $main-color;
         flex: 1;
         cursor: pointer;
+        text-transform: uppercase;
+        text-decoration: none;
+        background: rgba(0, 0, 0, 0.19);
+        &:first-child {
+            border-radius: 8px 0 0 0;
+        }
+        &:last-child {
+            border-radius: 0 8px 0 0;
+        }
     }
-    &__with-phone {
-        text-align: center;
-        font-style: normal;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 19px;
-        color: $main-color;
-        flex: 1;
-        cursor: pointer;
+    &__body {
+        padding: 0 30px 10px 30px;
     }
 }
