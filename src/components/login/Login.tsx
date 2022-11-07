@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom';
 import st from './login.module.scss';
 
 import skypeIcon from '../../assets/img/skype.png';
@@ -15,7 +16,7 @@ export const LoginWithEmail = () => {
                 <a href="#" className={st['form__recover']}>Забыли пароль?</a>
             </div>
             <button type="submit" className={st['form__submit']}>Войти</button>
-            <a href="#" className={st['form__register']}>Зарегистрироваться</a>
+            <Link to="register" className={st['form__register']}>Зарегистрироваться</Link>
             <div className={st['form__icons']}>
                 <img src={skypeIcon} alt="skype" className={st['form__icon']} />
                 <img src={skypeIcon} alt="skype" className={st['form__icon']} />
@@ -40,7 +41,7 @@ export const LoginWithPhone = () => {
                 <a href="#" className={st['login__recover']}>Забыли пароль?</a>
             </div>
             <button type="submit" className={st['login__submit']}>Войти</button>
-            <a href="#" className={st['login__register']}>зарегистрироваться</a>
+            <Link to="register" className={st['login__register']}>зарегистрироваться</Link>
             <div className={st['login__icons']}>
                 <img src={skypeIcon} alt="skype" className={st['login__icon']} />
                 <img src={skypeIcon} alt="skype" className={st['login__icon']} />

@@ -1,4 +1,3 @@
-import { Routes } from 'react-router-dom';
 import { Form } from '../../components/form/Form';
 import { Logo } from '../../UI/logo/Logo';
 import st from './authPage.module.scss';
