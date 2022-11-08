@@ -1,4 +1,5 @@
 import {FC} from 'react';
+import {Link} from 'react-router-dom';
 import st from './logo.module.scss';
 
 interface ILogoProps {
@@ -6,5 +7,5 @@ interface ILogoProps {
 }
 
 export const Logo:FC<ILogoProps> = ({sx}) => {
-    return <h1 className={st['logo']} style={{...sx}}>Skipper</h1>
+    return <Link to="/" className={st['logo']} style={{...sx}}>Skipper</Link>
 };

@@ -3,7 +3,7 @@ import st from './navbar.module.scss';
 
 const pathNamesData: any = {
     '/': 'Главная',
-    menti: 'Профиль менти',
+    'menti-page': 'Профиль менти',
     'mentor-page': 'Профиль ментора',
 };
 

@@ -1,4 +1,5 @@
 import {useRef} from 'react';
+import {Link} from 'react-router-dom';
 import {Badge} from '@mui/material';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
@@ -59,7 +60,7 @@ export const Header = () => {
                     </div>
                     <div className={st['header__right']}>
                         <div className={st['header__cla']}>
-                            <span className={st['header__find-mentor']}>Найти ментора</span>
+                            <Link to="/" className={st['header__find-mentor']}>Найти ментора</Link>
                             <span className={st['header__change-lang']}>Change language</span>
                             <span className={st['header__alert']}>
                                 <Badge badgeContent={1} sx={{ "& .MuiBadge-badge": { backgroundColor: '#ED5F5F', color: "#fff" }}}>
@@ -71,7 +72,7 @@ export const Header = () => {
                                 <SearchOutlinedIcon sx={{ width: '24px', height: '24px', color: 'rgba(96, 96, 96, 1)' }} onClick={showSearchField}/>
                             </span>
                         </div>
-                        <div className={st['header__profile']}>
+                        <Link to="menti-page" className={st['header__profile']}>
                             <div className={st['info']}>
                                 <span className={st['username']}>Азамат Амаев</span>
                                 <span className={st['role']}>ментор</span>
@@ -79,7 +80,7 @@ export const Header = () => {
                             <div className={st['img-wrap']}>
                                 <img src={profileImg} alt="Фото пользователя" />
                             </div>
-                        </div>
+                        </Link>
                     </div>
                 </nav>
             </div>

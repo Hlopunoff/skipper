@@ -12,7 +12,7 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<Layout/>}>
-          <Route path='menti' element={<MentiPage/>}/>
+          <Route path='menti-page' element={<MentiPage/>}/>
           <Route path='mentor-page' element={<MentorPage/>}/>
         </Route>
         <Route path='/auth' element={<AuthPage/>}>
