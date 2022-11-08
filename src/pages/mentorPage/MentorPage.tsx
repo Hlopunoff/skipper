@@ -6,29 +6,33 @@ import { MentorReviews } from '../../components/mentorReviews/MentorReviews';
 import { ProfileReport } from '../../components/profileReport/ProfileReport';
 import { Consultation } from '../../components/consultation/Consultation';
 import { Schedule } from '../../components/schedule/Schedule';
+import { Modal } from '../../components/modal/Modal';
 
 import st from './mentorPage.module.scss';
 
 
 export const MentorPage = () => {
     return (
-        <section className={st['mentorPage']}>
-            <div className="container">
-                <div className={st['mentorPage__content']}>
-                    <div className={st['mentorPage__info']}>
-                        <MentorCard/>
-                        <LessonsStats width='100%' padding='30px 42px 0px 26px'/>
-                        <PriceList/>
-                        <MentorResume/>
-                        <MentorReviews/>
-                        <ProfileReport/>
-                    </div>
-                    <div className={st['mentorPage__cla']}>
-                        <Consultation/>
-                        <Schedule/>
+        <>
+            <section className={st['mentorPage']}>
+                <div className="container">
+                    <div className={st['mentorPage__content']}>
+                        <div className={st['mentorPage__info']}>
+                            <MentorCard />
+                            <LessonsStats width='100%' padding='30px 42px 0px 26px' />
+                            <PriceList />
+                            <MentorResume />
+                            <MentorReviews />
+                            <ProfileReport />
+                        </div>
+                        <div className={st['mentorPage__cla']}>
+                            <Consultation />
+                            <Schedule />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+            <Modal/>
+        </>
     );
 };
