@@ -42,50 +42,6 @@
             color: #828282;
         }
     }
-    & .table {
-        margin-top: 20px;
-        &__days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            align-items: center;
-        }
-        &__day {
-            text-align: center;
-            font-family: 'IBM Plex Sans';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 16px;
-            line-height: 18px;
-            text-transform: uppercase;
-            color: rgba(36, 26, 54, 0.53);
-            letter-spacing: 1.5px;
-        }
-        &__times {
-            margin-top: 15px;
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-        }
-        &__col {
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            row-gap: 7px;
-        }
-        &__time {
-            padding: 5px 0;
-            text-align: center;
-            border: 1px solid #828282;
-            font-family: 'IBM Plex Sans';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 12px;
-            letter-spacing: .22px;
-            line-height: 16px;
-            color: #828282;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-    }
     &__check {
         margin-top: 45px;
         width: 100%;
@@ -98,5 +54,50 @@
         line-height: 18px;
         color: $main-color;
         padding: 7px 0;
+    }
+}
+.table {
+    margin-top: 20px;
+    &__days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        align-items: center;
+    }
+    &__day {
+        text-align: center;
+        font-family: 'IBM Plex Sans';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 18px;
+        text-transform: uppercase;
+        color: rgba(36, 26, 54, 0.53);
+        letter-spacing: 1.5px;
+    }
+    &__times {
+        margin-top: 15px;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    }
+    &__col {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        row-gap: 7px;
+    }
+    &__time {
+        width: 100%;
+        padding: 10px 0;
+        text-align: center;
+        border: 1px solid #828282;
+        font-family: 'IBM Plex Sans';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        letter-spacing: .22px;
+        line-height: 16px;
+        color: #828282;
+        cursor: pointer;
+        text-transform: uppercase;
     }
 }

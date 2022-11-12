@@ -52,8 +52,7 @@ export const Schedule = () => {
     )
 };
 
-const TableTimeCol: FC<ITableColProps> = ({times}) => {
-
+export const TableTimeCol: FC<ITableColProps> = ({times}) => {
     return (
         <div className={st['table__col']}>
             {times.map(time => (<div className={st['table__time']}>{time}</div>))}
