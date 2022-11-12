@@ -43,7 +43,7 @@ export const Modal = () => {
                     <div className={st['step']}></div>
                     <div className={st['step']}></div>
                 </div>
-                <div className={st['modal__options']}>
+                <div className={st['modal__options']} style={{display: 'none'}}>
                     <div className={st['option']}>
                         <div className={st['option__info']}>
                             <h4 className={st['option__title']}>Теоретическая консультация</h4>
@@ -64,6 +64,64 @@ export const Modal = () => {
                             <span className={st['option__subtitle']}>Описание задачи с последующим онлайн-решением</span>
                         </div>
                         <span className={st['option__price']}>1700 руб</span>
+                    </div>
+                </div>
+                <div className={st['modal__timetable']}>
+                    <div className={st['timetable__categories']}>
+                        <h2 className={st['timetable__category']}>15 мин (пробное занятие)</h2>
+                        <h2 className={st['timetable__category']}>30 минут</h2>
+                        <h2 className={st['timetable__category']}>60 минут</h2>
+                        <h2 className={st['timetable__category']}>90 минут</h2>
+                    </div>
+                    <div className={st['timetable__categories']}>
+                        <div className={st['timetable__category']}>
+                            <div className={st['timetable__available']}>
+                                <span className="timetable__amountOfLessons">1 занятие</span>
+                                <span className="timetable__priceOfLessons">100 руб</span>
+                            </div>
+                        </div>
+                        <div className={st['timetable__category']}>
+                            <div className={st['timetable__available']}>
+                                <span className="timetable__amountOfLessons">1 занятие</span>
+                                <span className="timetable__priceOfLessons">700 руб</span>
+                            </div>
+                            <div className={st['timetable__available']}>
+                                <span className="timetable__amountOfLessons">3 занятия</span>
+                                <span className="timetable__priceOfLessons">1950 руб</span>
+                            </div>
+                            <div className={st['timetable__available']}>
+                                <span className="timetable__amountOfLessons">5 занятий</span>
+                                <span className="timetable__priceOfLessons">3250 руб</span>
+                            </div>
+                        </div>
+                        <div className={st['timetable__category']}>
+                            <div className={st['timetable__available']}>
+                                <span className="timetable__amountOfLessons">1 занятие</span>
+                                <span className="timetable__priceOfLessons">1370 руб</span>
+                            </div>
+                            <div className={st['timetable__available']}>
+                                <span className="timetable__amountOfLessons">3 занятия</span>
+                                <span className="timetable__priceOfLessons">3800 руб</span>
+                            </div>
+                            <div className={st['timetable__available']}>
+                                <span className="timetable__amountOfLessons">5 занятий</span>
+                                <span className="timetable__priceOfLessons">6000 руб</span>
+                            </div>
+                        </div>
+                        <div className={st['timetable__category']}>
+                            <div className={st['timetable__available']}>
+                                <span className="timetable__amountOfLessons">1 занятие</span>
+                                <span className="timetable__priceOfLessons">2000 руб</span>
+                            </div>
+                            <div className={st['timetable__available']}>
+                                <span className="timetable__amountOfLessons">3 занятия</span>
+                                <span className="timetable__priceOfLessons">5800 руб</span>
+                            </div>
+                            <div className={st['timetable__available']}>
+                                <span className="timetable__amountOfLessons">5 занятий</span>
+                                <span className="timetable__priceOfLessons">9400 руб</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className={st['modal__descr']}>

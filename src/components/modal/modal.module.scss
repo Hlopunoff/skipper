@@ -98,6 +98,49 @@
             color: $main-color;
         }
     }
+    &__timetable {
+        display: flex;
+        flex-direction: column;
+        row-gap: 35px;
+        .timetable {
+            &__categories {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                column-gap: 22px;
+                &:not(div) {
+                    align-items: center;
+                }
+            }
+            &__category {
+                display: flex;
+                flex-direction: column;
+                row-gap: 20px;
+                &:not(div) {
+                    text-align: center;
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 19px;
+                    color: $main-color;
+                }
+            }
+            &__available {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 25px 20px;
+                background: #FFFFFF;
+                border: 1px solid #D1D1D1;
+                border-radius: 8px;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 16px;
+                line-height: 23px;
+                color: $main-color;
+            }
+        }
+    }
     &__descr {
         display: flex;
         align-items: center;
