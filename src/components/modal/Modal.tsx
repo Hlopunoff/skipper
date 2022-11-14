@@ -1,4 +1,5 @@
-import {useRef, useEffect, useState} from 'react';
+import {useRef, useEffect, useState, FC} from 'react';
+
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -12,7 +13,17 @@ import skypeImg from '../../assets/img/skype.png';
 //! DELETE LATER
 const times = ['00:04 AM', '04:08 AM', '08:12 AM', '08:12 AM', '12:04 PM', '04:08 PM', '08:12 PM'];
 
-export const Modal = () => {
+interface IModalProps {
+    getModalRef: React.Dispatch<React.SetStateAction<React.RefObject<HTMLDivElement> | undefined>>;
+}
+
+interface IModalOptionProps {
+    title: string;
+    subtitle?: string;
+    price?: number;
+}
+
+export const Modal:FC<IModalProps> = ({getModalRef}) => {
     const [step, setStep] = useState(1);
     const modalRef= useRef<HTMLDivElement>(null);
     const stepRef = useRef<HTMLDivElement>(null);
@@ -61,12 +72,15 @@ export const Modal = () => {
         console.log(step, screenRefs[step]);
     };
 
+
     useEffect(() => {
         stepHandler(step);
+
+        getModalRef(modalRef);
     }, []);
 
     return (
-        <div className={`${st['modal']} modal_shown`} ref={modalRef} onClick={closeModal}>
+        <div className={`${st['modal']}`} ref={modalRef} onClick={closeModal}>
             <div className={st['modal__content']} onClick={e => e.stopPropagation()}>
                 <h3 className={st['modal__title']}>Выберите тип занятия</h3>
                 <div className={st['modal__steps']} ref={stepRef}>
@@ -77,27 +91,9 @@ export const Modal = () => {
                     <div className={st['step']}></div>
                 </div>
                 <div className={st['modal__options']} ref={firstScreenRef}>
-                    <div className={st['option']}>
-                        <div className={st['option__info']}>
-                            <h4 className={st['option__title']}>Теоретическая консультация</h4>
-                            <span className={st['option__subtitle']}>Решение профильных вопросов в устной форме</span>
-                        </div>
-                        <span className={st['option__price']}>1250 руб</span>
-                    </div>
-                    <div className={st['option']}>
-                        <div className={st['option__info']}>
-                            <h4 className={st['option__title']}>Практическое решение текущих проблем</h4>
-                            <span className={st['option__subtitle']}>Решение профильных вопросов в устной форме</span>
-                        </div>
-                        <span className={st['option__price']}>1370 руб</span>
-                    </div>
-                    <div className={st['option']}>
-                        <div className={st['option__info']}>
-                            <h4 className={st['option__title']}>Решение “под ключ”</h4>
-                            <span className={st['option__subtitle']}>Описание задачи с последующим онлайн-решением</span>
-                        </div>
-                        <span className={st['option__price']}>1700 руб</span>
-                    </div>
+                    <FirstScreenOption title='Теоретическая консультация' subtitle='Решение профильных вопросов в устной форме' price={1250} key={1}/>
+                    <FirstScreenOption title='Практическое решение текущих проблем' subtitle='Решение профильных вопросов в устной форме' price={1370} key={2}/>
+                    <FirstScreenOption title='Решение “под ключ”' subtitle='Описание задачи с последующим онлайн-решением' price={1700} key={3}/>
                 </div>
                 <div className={st['modal__lessons']} ref={secondScreenRef}>
                     <div className={st['lessons__categories']}>
@@ -108,52 +104,22 @@ export const Modal = () => {
                     </div>
                     <div className={st['lessons__categories']}>
                         <div className={st['lessons__category']}>
-                            <div className={st['lessons__available']}>
-                                <span className="lessons__amountOfLessons">1 занятие</span>
-                                <span className="lessons__priceOfLessons">100 руб</span>
-                            </div>
+                            <SecondScreenOption title='1 занятие' price={100} key={1}/>
                         </div>
                         <div className={st['lessons__category']}>
-                            <div className={st['lessons__available']}>
-                                <span className="lessons__amountOfLessons">1 занятие</span>
-                                <span className="lessons__priceOfLessons">700 руб</span>
-                            </div>
-                            <div className={st['lessons__available']}>
-                                <span className="lessons__amountOfLessons">3 занятия</span>
-                                <span className="lessons__priceOfLessons">1950 руб</span>
-                            </div>
-                            <div className={st['lessons__available']}>
-                                <span className="lessons__amountOfLessons">5 занятий</span>
-                                <span className="lessons__priceOfLessons">3250 руб</span>
-                            </div>
+                            <SecondScreenOption title='1 занятие' price={700} key={1}/>
+                            <SecondScreenOption title='3 занятия' price={1950} key={2}/>
+                            <SecondScreenOption title='5 занятий' price={3250} key={3}/>
                         </div>
                         <div className={st['lessons__category']}>
-                            <div className={st['lessons__available']}>
-                                <span className="lessons__amountOfLessons">1 занятие</span>
-                                <span className="lessons__priceOfLessons">1370 руб</span>
-                            </div>
-                            <div className={st['lessons__available']}>
-                                <span className="lessons__amountOfLessons">3 занятия</span>
-                                <span className="lessons__priceOfLessons">3800 руб</span>
-                            </div>
-                            <div className={st['lessons__available']}>
-                                <span className="lessons__amountOfLessons">5 занятий</span>
-                                <span className="lessons__priceOfLessons">6000 руб</span>
-                            </div>
+                            <SecondScreenOption title='1 занятие' price={1370} key={1} />
+                            <SecondScreenOption title='3 занятия' price={3800} key={2} />
+                            <SecondScreenOption title='5 занятий' price={600} key={3} />
                         </div>
                         <div className={st['lessons__category']}>
-                            <div className={st['lessons__available']}>
-                                <span className="lessons__amountOfLessons">1 занятие</span>
-                                <span className="lessons__priceOfLessons">2000 руб</span>
-                            </div>
-                            <div className={st['lessons__available']}>
-                                <span className="lessons__amountOfLessons">3 занятия</span>
-                                <span className="lessons__priceOfLessons">5800 руб</span>
-                            </div>
-                            <div className={st['lessons__available']}>
-                                <span className="lessons__amountOfLessons">5 занятий</span>
-                                <span className="lessons__priceOfLessons">9400 руб</span>
-                            </div>
+                            <SecondScreenOption title='1 занятие' price={200} key={1} />
+                            <SecondScreenOption title='3 занятия' price={5800} key={2} />
+                            <SecondScreenOption title='5 занятий' price={9400} key={3} />
                         </div>
                     </div>
                 </div>
@@ -194,42 +160,10 @@ export const Modal = () => {
                 </div>
                 <div className={st['modal__communication']} ref={fourthScreenRef}>
                     <div className={st['communication__wrap']}>
-                        <div className={st['communication__way']}>
-                            <div className={st['communication__info']}>
-                                <h4 className={st['communication__name']}>Skype</h4>
-                                <span className={st['communication__ID']}>Ваш ID: bolshoyPapochka93</span>
-                            </div>
-                            <div className={st['communication__img-wrap']}>
-                                <img src={skypeImg} alt="skype" className={st['communication__img']} />
-                            </div>
-                        </div>
-                        <div className={st['communication__way']}>
-                            <div className={st['communication__info']}>
-                                <h4 className={st['communication__name']}>Skype</h4>
-                                <span className={st['communication__ID']}>Ваш ID: bolshoyPapochka93</span>
-                            </div>
-                            <div className={st['communication__img-wrap']}>
-                                <img src={skypeImg} alt="skype" className={st['communication__img']} />
-                            </div>
-                        </div>
-                        <div className={st['communication__way']}>
-                            <div className={st['communication__info']}>
-                                <h4 className={st['communication__name']}>Skype</h4>
-                                <span className={st['communication__ID']}>Ваш ID: bolshoyPapochka93</span>
-                            </div>
-                            <div className={st['communication__img-wrap']}>
-                                <img src={skypeImg} alt="skype" className={st['communication__img']} />
-                            </div>
-                        </div>
-                        <div className={st['communication__way']}>
-                            <div className={st['communication__info']}>
-                                <h4 className={st['communication__name']}>Skype</h4>
-                                <span className={st['communication__ID']}>Ваш ID: bolshoyPapochka93</span>
-                            </div>
-                            <div className={st['communication__img-wrap']}>
-                                <img src={skypeImg} alt="skype" className={st['communication__img']} />
-                            </div>
-                        </div>
+                        <FourthScreenOption title='Skype' subtitle='Ваш ID: bolshoyPapochka93' key={1}/>
+                        <FourthScreenOption title='Skype' subtitle='Ваш ID: bolshoyPapochka93' key={2}/>
+                        <FourthScreenOption title='Skype' subtitle='Ваш ID: bolshoyPapochka93' key={3}/>
+                        <FourthScreenOption title='Skype' subtitle='Ваш ID: bolshoyPapochka93' key={4}/>
                     </div>
                 </div>
                 <div className={st['modal__descr']}>
@@ -247,6 +181,47 @@ export const Modal = () => {
                 <div className={st['modal__previous']} onClick={() => modalHandler('back')}>
                     <ArrowBackIosIcon sx={{color: '#AEAEAE', width: '30px', height: '30px'}}/>
                 </div>
+            </div>
+        </div>
+    );
+};
+
+
+const FirstScreenOption:FC<IModalOptionProps> = ({title, subtitle, price}) => {
+    return (
+        <div className={st['option']} onClick={(e) => {
+            (e.currentTarget as HTMLDivElement).classList.toggle('modal_chosen')
+            }}>
+            <div className={st['option__info']}>
+                <h4 className={st['option__title']}>{title}</h4>
+                <span className={st['option__subtitle']}>{subtitle}</span>
+            </div>
+            <span className={st['option__price']}>{price} руб</span>
+        </div>
+    );
+};
+
+const SecondScreenOption:FC<IModalOptionProps> = ({title, price}) => {
+    return (
+        <div className={st['lessons__available']} onClick={(e) => {
+            (e.currentTarget as HTMLDivElement).classList.toggle('modal_chosen')}}>
+            <span className="lessons__amountOfLessons">{title}</span>
+            <span className="lessons__priceOfLessons">{price} руб</span>
+        </div>
+    );
+};
+
+const FourthScreenOption:FC<IModalOptionProps> = ({title, subtitle}) => {
+    return (
+        <div className={st['communication__way']} onClick={e => {
+            (e.currentTarget as HTMLDivElement).classList.toggle('modal_chosen');
+        }}>
+            <div className={st['communication__info']}>
+                <h4 className={st['communication__name']}>{title}</h4>
+                <span className={st['communication__ID']}>{subtitle}</span>
+            </div>
+            <div className={st['communication__img-wrap']}>
+                <img src={skypeImg} alt="skype" className={st['communication__img']} />
             </div>
         </div>
     );

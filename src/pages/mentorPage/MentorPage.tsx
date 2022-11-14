@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 import { MentorCard } from '../../components/mentorCard/MentorCard';
 import { LessonsStats } from '../../components/lessonsStats/LessonsStats';
 import { PriceList } from '../../components/priceList/PriceList';
@@ -12,6 +14,8 @@ import st from './mentorPage.module.scss';
 
 
 export const MentorPage = () => {
+    const [modalRef, setModalRef] = useState<React.RefObject<HTMLDivElement>>();
+
     return (
         <>
             <section className={st['mentorPage']}>
@@ -26,13 +30,13 @@ export const MentorPage = () => {
                             <ProfileReport />
                         </div>
                         <div className={st['mentorPage__cla']}>
-                            <Consultation />
+                            <Consultation modalRef={modalRef}/>
                             <Schedule />
                         </div>
                     </div>
                 </div>
             </section>
-            <Modal/>
+            <Modal getModalRef={setModalRef}/>
         </>
     );
 };

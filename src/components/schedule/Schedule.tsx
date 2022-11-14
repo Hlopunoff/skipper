@@ -55,7 +55,10 @@ export const Schedule = () => {
 export const TableTimeCol: FC<ITableColProps> = ({times}) => {
     return (
         <div className={st['table__col']}>
-            {times.map(time => (<div className={st['table__time']}>{time}</div>))}
+            {times.map(time => (<div 
+                    className={st['table__time']} 
+                    onClick={e => {(e.currentTarget as HTMLDivElement).classList.toggle('modal_chosen');
+            }}>{time}</div>))}
         </div>
     );
 };

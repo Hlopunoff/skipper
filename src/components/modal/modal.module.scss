@@ -70,6 +70,7 @@
         padding: 30px;
         display: flex;
         justify-content: space-between;
+        cursor: pointer;
         &__info {
             display: flex;
             flex-direction: column;
@@ -112,6 +113,7 @@
                 }
             }
             &__category {
+                display: flex;
                 flex-direction: column;
                 row-gap: 20px;
                 &:not(div) {
@@ -137,6 +139,7 @@
                 font-size: 16px;
                 line-height: 23px;
                 color: $main-color;
+                cursor: pointer;
             }
         }
     }
@@ -223,6 +226,7 @@
                 background: #FFFFFF;
                 border: 1px solid #D1D1D1;
                 border-radius: 8px;
+                cursor: pointer;
             }
             &__info {
                 display: flex;
