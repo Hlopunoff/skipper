@@ -1,15 +1,17 @@
 import {FC} from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { removeActiveClasses } from '../modal/Modal';
 
 import st from './schedule.module.scss';
 
 interface ITableColProps {
     times: string[];
+    getCurrentTime?: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 //! DELETE LATER
-const times = ['00:04 AM', '04:08 AM', '08:12 AM', '08:12 AM', '12:04 PM', '04:08 PM', '08:12 PM'];
+const times = ['00:04 AM', '04:08 AM', '08:12 AM', '08:15 AM', '12:04 PM', '04:08 PM', '08:12 PM'];
 
 export const Schedule = () => {
     return (
@@ -52,12 +54,19 @@ export const Schedule = () => {
     )
 };
 
-export const TableTimeCol: FC<ITableColProps> = ({times}) => {
+export const TableTimeCol: FC<ITableColProps> = ({times, getCurrentTime}) => {
     return (
         <div className={st['table__col']}>
             {times.map(time => (<div 
-                    className={st['table__time']} 
-                    onClick={e => {(e.currentTarget as HTMLDivElement).classList.toggle('modal_chosen');
+                    className={st['table__time']}
+                    key={time} 
+                    onClick={e => {
+                        removeActiveClasses(e.currentTarget.parentElement);
+                        (e.currentTarget as HTMLDivElement).classList.add('modal_chosen');
+                        
+                        if(getCurrentTime) {
+                            getCurrentTime(prev => [...prev, time]);
+                        }
             }}>{time}</div>))}
         </div>
     );
