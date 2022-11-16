@@ -84,31 +84,6 @@
             object-fit: cover;
         }
     }
-    &__rating {
-        margin-top: 13px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        column-gap: 6px;
-        & .icons {
-            height: 20px;
-            display: flex;
-            align-items: center;
-            column-gap: 4px;
-            & img {
-                width: 20px;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
-        & .rating {
-            font-style: normal;
-            font-weight: 400;
-            font-size: 18px;
-            line-height: 21px;
-            color: $main-color;
-        }
-    }
     &__amount {
         text-align: right;
         margin-top: 17px;

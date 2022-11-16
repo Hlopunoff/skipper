@@ -1,6 +1,6 @@
 import {FC} from 'react';
 
-import st from './mentorReviews.module.scss';
+import st from './reviews.module.scss';
 
 import userAvatar from '../../assets/img/header_profile.png';
 import avatarPlug from '../../assets/img/avatar_plug.jpg';
@@ -12,7 +12,7 @@ interface IReviewProps {
     text: string;
 }
 
-export const MentorReviews = () => {
+export const Reviews = () => {
     return (
         <div className={st['mentorReview']}>
             <div className={st['table']}>

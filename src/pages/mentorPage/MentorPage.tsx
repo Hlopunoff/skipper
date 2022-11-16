@@ -4,7 +4,7 @@ import { MentorCard } from '../../components/mentorCard/MentorCard';
 import { LessonsStats } from '../../components/lessonsStats/LessonsStats';
 import { PriceList } from '../../components/priceList/PriceList';
 import { MentorResume } from '../../components/mentorResume/MentorResume';
-import { MentorReviews } from '../../components/mentorReviews/MentorReviews';
+import { Reviews } from '../../components/reviews/Reviews';
 import { ProfileReport } from '../../components/profileReport/ProfileReport';
 import { Consultation } from '../../components/consultation/Consultation';
 import { Schedule } from '../../components/schedule/Schedule';
@@ -26,7 +26,7 @@ export const MentorPage = () => {
                             <LessonsStats width='100%' padding='30px 42px 0px 26px' />
                             <PriceList />
                             <MentorResume />
-                            <MentorReviews />
+                            <Reviews />
                             <ProfileReport />
                         </div>
                         <div className={st['mentorPage__cla']}>

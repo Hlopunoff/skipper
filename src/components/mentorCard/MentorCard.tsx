@@ -1,8 +1,9 @@
+import { Rating } from '../../UI/rating/Rating';
+
 import st from './mentorCard.module.scss';
 
 import mentorImg from '../../assets/img/mentor_profile.png';
 import heartImg from '../../assets/icons/heart.svg';
-import starImg from '../../assets/icons/star.svg';
 
 export const MentorCard = () => {
     return (
@@ -23,16 +24,7 @@ export const MentorCard = () => {
                     <div className={st['mentorCard__fav']}>
                         <img src={heartImg} alt="Добавить в понравившиеся" />
                     </div>
-                    <div className={st['mentorCard__rating']}>
-                        <div className={st['icons']}>
-                            <img src={starImg} alt="" />
-                            <img src={starImg} alt="" />
-                            <img src={starImg} alt="" />
-                            <img src={starImg} alt="" />
-                            <img src={starImg} alt="" />
-                        </div>
-                        <span className={st['rating']}>4.8</span>
-                    </div>
+                    <Rating sx={{justifyContent: 'flex-end'}}/>
                     <div className={st['mentorCard__amount']}>
                         <span className={st['students']}>46 студентов</span>
                         <span className={st['lessons']}>248 занятий</span>
