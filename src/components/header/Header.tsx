@@ -72,7 +72,7 @@ export const Header = () => {
                                 <SearchOutlinedIcon sx={{ width: '24px', height: '24px', color: 'rgba(96, 96, 96, 1)' }} onClick={showSearchField}/>
                             </span>
                         </div>
-                        <Link to="mentee" className={st['header__profile']}>
+                        <div className={st['header__profile']}>
                             <div className={st['info']}>
                                 <span className={st['username']}>Азамат Амаев</span>
                                 <span className={st['role']}>ментор</span>
@@ -80,7 +80,52 @@ export const Header = () => {
                             <div className={st['img-wrap']}>
                                 <img src={profileImg} alt="Фото пользователя" />
                             </div>
-                        </Link>
+                            <div className={st['profile-dropdown']}>
+                                <div className={st['profile-dropdown__wrap']}>
+                                    <ul className={st['profile-dropdown__list']}>
+                                        <li className={st['profile-dropdown__item']}>
+                                            <div className={st['profile-dropdown__info']}>
+                                                <CalendarTodayOutlinedIcon sx={{ gridRowStart: '1', gridRowEnd: '4', width: '24px', height: '25px' }} />
+                                                <h4 className={st['profile-dropdown__name']}>Кошелёк</h4>
+                                                <span className={st['profile-dropdown__subtitle']}>всего на счету</span>
+                                            </div>
+                                            <span className={st['profile-dropdown__extra-info']}>2 403.00 ₽</span>
+                                        </li>
+                                        <li className={st['profile-dropdown__item']}>
+                                            <div className={st['profile-dropdown__info']}>
+                                                <CalendarTodayOutlinedIcon sx={{ gridRowStart: '1', gridRowEnd: '4', width: '24px', height: '25px' }} />
+                                                <h4 className={st['profile-dropdown__name']}>Календарь</h4>
+                                                <span className={st['profile-dropdown__subtitle']}>ближайшее событие</span>
+                                            </div>
+                                            <span className={st['profile-dropdown__extra-info']}>22.10.2020</span>
+                                        </li>
+                                        <li className={st['profile-dropdown__item']}>
+                                            <div className={st['profile-dropdown__info']}>
+                                                <CalendarTodayOutlinedIcon />
+                                                <h4 className={st['profile-dropdown__name']}>Сохраненное</h4>
+                                            </div>
+                                            <span className={st['profile-dropdown__extra-info']}>14</span>
+                                        </li>
+                                        <li className={st['profile-dropdown__item']}>
+                                            <div className={st['profile-dropdown__info']}>
+                                                <CalendarTodayOutlinedIcon sx={{ gridRowStart: '1', gridRowEnd: '4', width: '24px', height: '25px' }} />
+                                                <Link to="mentee" className={st['profile-dropdown__name']}>Профиль</Link>
+                                            </div>
+                                        </li>
+                                        <li className={st['profile-dropdown__item']}>
+                                            <div className={st['profile-dropdown__info']}>
+                                                <CalendarTodayOutlinedIcon sx={{ gridRowStart: '1', gridRowEnd: '4', width: '24px', height: '25px' }} />
+                                                <h4 className={st['profile-dropdown__name']}>Настройки</h4>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div className={st['profile-dropdown__cla']}>
+                                        <a href="#" className={st['profile-dropdown__tech-help']}>Техническая поддержка</a>
+                                        <a href="#" className={st['profile-dropdown__logout']}>Выйти</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </nav>
             </div>

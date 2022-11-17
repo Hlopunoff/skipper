@@ -70,11 +70,11 @@
         }
     }
     &__profile {
+        position: relative;
         text-decoration: none;
         display: flex;
         align-items: center;
         column-gap: 10px;
-        cursor: pointer;
         & .info {
             display: flex;
             flex-direction: column;
@@ -104,6 +104,96 @@
                 height: 120%;
                 border-radius: 50%;
                 object-fit: cover;
+            }
+        }
+        &:hover {
+            .profile-dropdown {
+                display: block;
+            }
+        }
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            z-index: 10;
+            right: 0;
+            top: 10px;
+            background-color: transparent;
+            padding-top: 50px;
+            &__wrap {
+                background: #FFFFFF;
+                box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+                padding: 15px 25px;
+                display: flex;
+                flex-direction: column;
+                row-gap: 70px;
+            }
+            &__list {
+                list-style-type: none;
+                display: flex;
+                flex-direction: column;
+                row-gap: 14px;
+            }
+            &__item {
+                display: flex;
+                justify-content: space-between;
+                padding-bottom: 5px;
+                border-bottom: 1px solid #DADADA;
+                cursor: pointer;
+            }
+            &__info {
+                display: grid;
+                grid-template-columns: 25px 1fr;
+                grid-template-rows: min-content min-content;
+                column-gap: 5px;
+            }
+            &__name {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 17px;
+                color: $main-color;
+                text-decoration: none;
+                
+            }
+            &__subtitle {
+                display: inline-block;
+                width: 100%;
+                white-space: nowrap;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 12px;
+                line-height: 13px;
+                color: $main-color;
+            }
+            &__extra-info {
+                display: block;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 17px;
+                color: $main-color;
+            }
+            &__cla {
+                display: flex;
+                flex-direction: column;
+                row-gap: 10px;
+            }
+            &__tech-help {
+                text-decoration: none;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 17px;
+                color: $main-color;
+            }
+            &__logout {
+                text-decoration: none;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 17px;
+                color: $main-color;
             }
         }
     }
