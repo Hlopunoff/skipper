@@ -72,7 +72,7 @@ export const Header = () => {
                                 <SearchOutlinedIcon sx={{ width: '24px', height: '24px', color: 'rgba(96, 96, 96, 1)' }} onClick={showSearchField}/>
                             </span>
                         </div>
-                        <Link to="menti-page" className={st['header__profile']}>
+                        <Link to="mentee" className={st['header__profile']}>
                             <div className={st['info']}>
                                 <span className={st['username']}>Азамат Амаев</span>
                                 <span className={st['role']}>ментор</span>

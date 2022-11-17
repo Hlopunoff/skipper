@@ -1,22 +1,28 @@
 import {useRef, useState} from 'react';
+import Rating from '@mui/material/Rating';
 
 import st from './createReview.module.scss';
-import ratingIcon from '../../assets/icons/star.svg';
 
 export const CreateReview = () => {
     const fieldRef = useRef<HTMLTextAreaElement>(null);
     const [review, setReview] = useState('');
+    const [rating, setRating] = useState<number | null>(0);
 
     return (
         <div className={st['review']}>
             <h3 className={st['review__title']}>Оставить отзыв</h3>
-            <div className={st['review__ratings']}>
+            {/* <div className={st['review__ratings']}>
                 <div className={`icon-star ${st['review__rating']}`}></div>
                 <div className={`icon-star ${st['review__rating']}`}></div>
                 <div className={`icon-star ${st['review__rating']}`}></div>
                 <div className={`icon-star ${st['review__rating']}`}></div>
                 <div className={`icon-star ${st['review__rating']}`}></div>
-            </div>
+            </div> */}
+            <Rating 
+                sx={{marginTop: '20px', maxWidth: '113px'}}
+                value={rating}
+                onChange={(e, newValue) => setRating(newValue)}
+                precision={0.2}/>
             <div className={st['review__field-wrap']}>
                 <textarea 
                     maxLength={400} 

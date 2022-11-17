@@ -12,8 +12,8 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<Layout/>}>
-          <Route path='mentee-page' element={<MentiPage/>}/>
-          <Route path='mentor-page' element={<MentorPage/>}/>
+          <Route path='mentee' element={<MentiPage/>}/>
+          <Route path='mentor' element={<MentorPage/>}/>
         </Route>
         <Route path='/auth' element={<AuthPage/>}>
           <Route index element={<LoginWithEmail/>}/>

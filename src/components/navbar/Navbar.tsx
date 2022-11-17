@@ -3,8 +3,8 @@ import st from './navbar.module.scss';
 
 const pathNamesData: any = {
     '/': 'Главная',
-    'mentee-page': 'Профиль менти',
-    'mentor-page': 'Профиль ментора',
+    'mentee': 'Профиль менти',
+    'mentor': 'Профиль ментора',
 };
 
 export const Navbar = () => {
