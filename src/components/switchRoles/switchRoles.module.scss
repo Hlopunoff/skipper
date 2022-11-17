@@ -1,0 +1,31 @@
+@import '../../styles/colors';
+.switch {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__mentee {
+        background: #FFFFFF;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+        border: none;
+        border-radius: 8px;
+        padding: 14px 50px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 27px;
+        color: #000;
+    }
+    &__mentor {
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+        border: none;
+        border-radius: 8px;
+        padding: 14px 40px;
+        background-color: $main-purple;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 27px;
+        color: #FFFFFF;
+    }
+}

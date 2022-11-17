@@ -11,13 +11,6 @@ export const CreateReview = () => {
     return (
         <div className={st['review']}>
             <h3 className={st['review__title']}>Оставить отзыв</h3>
-            {/* <div className={st['review__ratings']}>
-                <div className={`icon-star ${st['review__rating']}`}></div>
-                <div className={`icon-star ${st['review__rating']}`}></div>
-                <div className={`icon-star ${st['review__rating']}`}></div>
-                <div className={`icon-star ${st['review__rating']}`}></div>
-                <div className={`icon-star ${st['review__rating']}`}></div>
-            </div> */}
             <Rating 
                 sx={{marginTop: '20px', maxWidth: '113px'}}
                 value={rating}
