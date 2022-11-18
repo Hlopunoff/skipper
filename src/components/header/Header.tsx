@@ -32,10 +32,81 @@ export const Header = () => {
                         <Logo sx={{}}/>
                         <div className={st['header__icons-wrap']}>
                             <ul className={st['header__icons']}>
-                                <li className={st['header__icon']}>
+                                <li className={`${st['header__icon']}`}>
                                     <Badge badgeContent={3} sx={{ "& .MuiBadge-badge": { backgroundColor: '#ED5F5F', color: "#fff" } }}>
                                         <CheckBoxOutlinedIcon sx={{ color: "rgba(96, 96, 96, 1)", width: "24px", height: "24px" }} />
                                     </Badge>
+                                    <div className={st['notification']}>
+                                        <div className={st['notification__content']}>
+                                            <h3 className={st['notification__title']}>Уведомления</h3>
+                                            <ul className={st['notification__list']}>
+                                                <li className={st['notification__item']}>
+                                                    <div className={st['notification__info']}>
+                                                        <div className={st['notification__img-wrap']}>
+                                                            <img src={profileImg} alt="profile" className={st['notification__img']} />
+                                                        </div>
+                                                        <div className={st['notification__desc']}>
+                                                            <span className={st['notification__username']}>Азамат Имаев (Теоретиеское занятие)</span>
+                                                            <div className={st['notification__details']}>
+                                                                <span className={st['notification__detail']}>09.09.2022</span>
+                                                                <div className={st['notification__divider']}></div>
+                                                                <span className={st['notification__detail']}>17:00 GMT+5</span>
+                                                                <div className={st['notification__divider']}></div>
+                                                                <span className={st['notification__detail']}>1700 руб</span>
+                                                            </div>
+                                                            <div className={st['notification__status-message']}>
+                                                                На рассмотрении
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className={st['notification__status-marker']}></div>
+                                                </li>
+                                                <li className={st['notification__item']}>
+                                                    <div className={st['notification__info']}>
+                                                        <div className={st['notification__img-wrap']}>
+                                                            <img src={profileImg} alt="profile" className={st['notification__img']} />
+                                                        </div>
+                                                        <div className={st['notification__desc']}>
+                                                            <span className={st['notification__username']}>Азамат Имаев (Теоретиеское занятие)</span>
+                                                            <div className={st['notification__details']}>
+                                                                <span className={st['notification__detail']}>09.09.2022</span>
+                                                                <div className={st['notification__divider']}></div>
+                                                                <span className={st['notification__detail']}>17:00 GMT+5</span>
+                                                                <div className={st['notification__divider']}></div>
+                                                                <span className={st['notification__detail']}>1700 руб</span>
+                                                            </div>
+                                                            <div className={st['notification__status-message']}>
+                                                                Ссылка:
+                                                                <a href="#" className="notification__link">clic.ly/skippermeetings</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className={st['notification__status-marker']} style={{backgroundColor: '#73ED5F'}}></div>
+                                                </li>
+                                                <li className={st['notification__item']}>
+                                                    <div className={st['notification__info']}>
+                                                        <div className={st['notification__img-wrap']}>
+                                                            <img src={profileImg} alt="profile" className={st['notification__img']} />
+                                                        </div>
+                                                        <div className={st['notification__desc']}>
+                                                            <span className={st['notification__username']}>Азамат Имаев (Теоретиеское занятие)</span>
+                                                            <div className={st['notification__details']}>
+                                                                <span className={st['notification__detail']}>09.09.2022</span>
+                                                                <div className={st['notification__divider']}></div>
+                                                                <span className={st['notification__detail']}>17:00 GMT+5</span>
+                                                                <div className={st['notification__divider']}></div>
+                                                                <span className={st['notification__detail']}>1700 руб</span>
+                                                            </div>
+                                                            <div className={st['notification__status-message']}>
+                                                                Отказано
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className={st['notification__status-marker']} style={{backgroundColor: '#ED5F5F'}}></div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </li>
                                 <li className={st['header__icon']}>
                                     <Badge badgeContent={2} sx={{ "& .MuiBadge-badge": { backgroundColor: '#ED5F5F', color: "#fff" } }}>

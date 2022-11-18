@@ -9,6 +9,7 @@ interface IConsultationProps {
 export const Consultation:FC<IConsultationProps> = ({modalRef}) => {
     const bookConsultation = () => {
         modalRef?.current?.classList.add('modal_shown');
+        document.querySelector('body')?.classList.add('scrollbar_hidden');
     };
 
     return (
@@ -19,7 +20,6 @@ export const Consultation:FC<IConsultationProps> = ({modalRef}) => {
             </div>
             <div className={st['consultation__cla']}>
                 <button className={st['consultation__book']} onClick={bookConsultation}>Забронировать</button>
-                <button className={st['consultation__contact']}>Связаться с ментором</button>
             </div>
         </div>
     );

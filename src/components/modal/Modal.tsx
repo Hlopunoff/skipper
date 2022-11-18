@@ -56,6 +56,7 @@ export const Modal:FC<IModalProps> = ({getModalRef}) => {
 
         if(modalRef.current) {
             modalRef.current.classList.remove('modal_shown');
+            document.querySelector('body')?.classList.remove('scrollbar_hidden');
         }
     };
 
