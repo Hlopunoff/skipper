@@ -1,4 +1,4 @@
-import {useRef} from 'react';
+import {useRef, FC} from 'react';
 import {Link} from 'react-router-dom';
 import {Badge} from '@mui/material';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
@@ -12,7 +12,18 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { Logo } from '../../UI/logo/Logo';
 
 import st from './header.module.scss';
-import profileImg from '../../assets/img/header_profile.png';
+import avatarPlug from '../../assets/img/avatar_plug.jpg';
+
+interface INotificationProps {
+    img: string | undefined;
+    username: string;
+    lessonType: string;
+    date: string;
+    timezone: string;
+    price: string | number;
+    connectionLink?: string;
+    statusMessage: 'success' | 'reject' | 'pending';
+}
 
 export const Header = () => {
     const searchFieldRef = useRef<HTMLInputElement>(null);
@@ -40,70 +51,34 @@ export const Header = () => {
                                         <div className={st['notification__content']}>
                                             <h3 className={st['notification__title']}>Уведомления</h3>
                                             <ul className={st['notification__list']}>
-                                                <li className={st['notification__item']}>
-                                                    <div className={st['notification__info']}>
-                                                        <div className={st['notification__img-wrap']}>
-                                                            <img src={profileImg} alt="profile" className={st['notification__img']} />
-                                                        </div>
-                                                        <div className={st['notification__desc']}>
-                                                            <span className={st['notification__username']}>Азамат Имаев (Теоретиеское занятие)</span>
-                                                            <div className={st['notification__details']}>
-                                                                <span className={st['notification__detail']}>09.09.2022</span>
-                                                                <div className={st['notification__divider']}></div>
-                                                                <span className={st['notification__detail']}>17:00 GMT+5</span>
-                                                                <div className={st['notification__divider']}></div>
-                                                                <span className={st['notification__detail']}>1700 руб</span>
-                                                            </div>
-                                                            <div className={st['notification__status-message']}>
-                                                                На рассмотрении
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className={st['notification__status-marker']}></div>
-                                                </li>
-                                                <li className={st['notification__item']}>
-                                                    <div className={st['notification__info']}>
-                                                        <div className={st['notification__img-wrap']}>
-                                                            <img src={profileImg} alt="profile" className={st['notification__img']} />
-                                                        </div>
-                                                        <div className={st['notification__desc']}>
-                                                            <span className={st['notification__username']}>Азамат Имаев (Теоретиеское занятие)</span>
-                                                            <div className={st['notification__details']}>
-                                                                <span className={st['notification__detail']}>09.09.2022</span>
-                                                                <div className={st['notification__divider']}></div>
-                                                                <span className={st['notification__detail']}>17:00 GMT+5</span>
-                                                                <div className={st['notification__divider']}></div>
-                                                                <span className={st['notification__detail']}>1700 руб</span>
-                                                            </div>
-                                                            <div className={st['notification__status-message']}>
-                                                                Ссылка:
-                                                                <a href="#" className="notification__link">clic.ly/skippermeetings</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className={st['notification__status-marker']} style={{backgroundColor: '#73ED5F'}}></div>
-                                                </li>
-                                                <li className={st['notification__item']}>
-                                                    <div className={st['notification__info']}>
-                                                        <div className={st['notification__img-wrap']}>
-                                                            <img src={profileImg} alt="profile" className={st['notification__img']} />
-                                                        </div>
-                                                        <div className={st['notification__desc']}>
-                                                            <span className={st['notification__username']}>Азамат Имаев (Теоретиеское занятие)</span>
-                                                            <div className={st['notification__details']}>
-                                                                <span className={st['notification__detail']}>09.09.2022</span>
-                                                                <div className={st['notification__divider']}></div>
-                                                                <span className={st['notification__detail']}>17:00 GMT+5</span>
-                                                                <div className={st['notification__divider']}></div>
-                                                                <span className={st['notification__detail']}>1700 руб</span>
-                                                            </div>
-                                                            <div className={st['notification__status-message']}>
-                                                                Отказано
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className={st['notification__status-marker']} style={{backgroundColor: '#ED5F5F'}}></div>
-                                                </li>
+                                                <Notification 
+                                                    key={1} 
+                                                    username='Азамат Имаев' 
+                                                    lessonType='Теоретическое занятие'
+                                                    date='09.09.2022'
+                                                    timezone='17:00 GMT+5'
+                                                    price={1700}
+                                                    img={undefined}
+                                                    statusMessage='pending'/>
+                                                <Notification 
+                                                    key={2} 
+                                                    username='Азамат Имаев' 
+                                                    lessonType='Теоретическое занятие'
+                                                    date='09.09.2022'
+                                                    timezone='17:00 GMT+5'
+                                                    price={1700}
+                                                    img={undefined}
+                                                    statusMessage='success'
+                                                    connectionLink='clic.ly/skippermeetings'/>
+                                                <Notification 
+                                                    key={3} 
+                                                    username='Азамат Имаев' 
+                                                    lessonType='Теоретическое занятие'
+                                                    date='09.09.2022'
+                                                    timezone='17:00 GMT+5'
+                                                    price={1700}
+                                                    img={undefined}
+                                                    statusMessage='reject'/>
                                             </ul>
                                         </div>
                                     </div>
@@ -149,7 +124,7 @@ export const Header = () => {
                                 <span className={st['role']}>ментор</span>
                             </div>
                             <div className={st['img-wrap']}>
-                                <img src={profileImg} alt="Фото пользователя" />
+                                <img src={avatarPlug} alt="Фото пользователя" />
                             </div>
                             <div className={st['profile-dropdown']}>
                                 <div className={st['profile-dropdown__wrap']}>
@@ -201,5 +176,31 @@ export const Header = () => {
                 </nav>
             </div>
         </header>
+    );
+};
+
+const Notification:FC<INotificationProps> = ({img, username, date, timezone, price, lessonType, statusMessage, connectionLink}) => {
+    return (
+        <li className={st['notification__item']}>
+            <div className={st['notification__info']}>
+                <div className={st['notification__img-wrap']}>
+                    <img src={img || avatarPlug} alt="profile" className={st['notification__img']} />
+                </div>
+                <div className={st['notification__desc']}>
+                    <span className={st['notification__username']}>{username} ({lessonType})</span>
+                    <div className={st['notification__details']}>
+                        <span className={st['notification__detail']}>{date}</span>
+                        <div className={st['notification__divider']}></div>
+                        <span className={st['notification__detail']}>{timezone}</span>
+                        <div className={st['notification__divider']}></div>
+                        <span className={st['notification__detail']}>{price} руб</span>
+                    </div>
+                    <div className={st['notification__status-message']}>
+                        {statusMessage === 'pending' ? 'На рассмотрении' : statusMessage === 'success' ? <>Ссылка: <a href={connectionLink}>{connectionLink}</a></>: 'Отказано'}
+                    </div>
+                </div>
+            </div>
+            <div className={st['notification__status-marker']} style={{ backgroundColor: `${statusMessage === 'pending' ? '#EDE75F' : statusMessage === 'success' ? '#73ED5F' : '#ED5F5F'}`}}></div>
+        </li>
     );
 };
