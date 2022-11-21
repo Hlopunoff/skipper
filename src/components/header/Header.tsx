@@ -25,7 +25,11 @@ interface INotificationProps {
     statusMessage: 'success' | 'reject' | 'pending';
 }
 
-export const Header = () => {
+interface IHeaderProps {
+    sx?: {};
+}
+
+export const Header:FC<IHeaderProps> = ({sx}) => {
     const searchFieldRef = useRef<HTMLInputElement>(null);
 
     const showSearchField = () => {
@@ -36,11 +40,11 @@ export const Header = () => {
     };
 
     return (
-        <header className={st['header']}>
+        <header className={st['header']} style={{...sx}}>
             <div className="container">
                 <nav className={st['header__nav']}>
                     <div className={st['header__left']}>
-                        <Logo sx={{}}/>
+                        <Logo loc='header'/>
                         <div className={st['header__icons-wrap']}>
                             <ul className={st['header__icons']}>
                                 <li className={`${st['header__icon']}`}>
