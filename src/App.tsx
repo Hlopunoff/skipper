@@ -1,6 +1,7 @@
 import {Routes, Route} from 'react-router-dom';
 
 import { Layout } from './components/layout/Layout';
+import { MainPage } from './pages/mainPage/MainPage';
 import { MentiPage } from './pages/mentiPage/MentiPage';
 import { MentorPage } from './pages/mentorPage/MentorPage';
 import { AuthPage } from './pages/authPage/AuthPage';
@@ -12,6 +13,7 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<Layout/>}>
+          <Route index element={<MainPage/>}/>
           <Route path='mentee' element={<MentiPage/>}/>
           <Route path='mentor' element={<MentorPage/>}/>
         </Route>

@@ -1,0 +1,10 @@
+@import '../../styles/colors';
+@import '../../styles/funcs';
+.sideBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 268px;
+    height: 100vh;
+    background-color: #fff;
+}

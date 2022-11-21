@@ -1,11 +1,13 @@
 import {FC} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import st from './logo.module.scss';
 
 interface ILogoProps {
-    sx: {}
+    sx?: {}
 }
 
 export const Logo:FC<ILogoProps> = ({sx}) => {
-    return <Link to="/" className={st['logo']} style={{...sx}}>Skipper</Link>
+    const location = useLocation();
+
+    return <Link to="/" className={st['logo']} style={{...sx, display: location.pathname === '/' ? 'none' : ''}}>Skipper</Link>
 };
