@@ -1,0 +1,120 @@
+@import '../../styles/colors';
+.card {
+    display: flex;
+    column-gap: 30px;
+    width: 100%;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+    text-decoration: none;
+    border-radius: 8px;
+    &__img {
+        margin: 30px 0 30px 20px;
+        border-radius: 50%;
+        max-width: 99px;
+        max-height: 99px;
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+    &__info {
+        margin-top: 17px;
+        margin-bottom: 13px;
+    }
+    &__username {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: $main-color;
+    }
+    &__specialty {
+        display: inline-block;
+        margin-top: 3px;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 15px;
+        color: $main-color;
+    }
+    &__desc {
+        margin-top: 8px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 23px;
+        color: $main-color;
+        hyphens: manual;
+    }
+    &__cla {
+        border-left: 2px solid #DADADA;
+        padding: 10px 10px 0 10px;
+    }
+    &__rating {
+        padding: 0 10px;
+        text-align: center;
+        margin-left: auto;
+        width: max-content;
+        height: 19px;
+        background: #7FC936;
+        border-radius: 3px;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 19px;
+        color: #fff;
+    }
+    &__price {
+        margin-top: 14px;
+        display: flex;
+        align-items: flex-end;
+    }
+    &__priceAmount {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        color: $main-color;
+    }
+    &__priceVariant {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 9px;
+        line-height: 17px;
+        color: $light-grey;
+    }
+    &__btns {
+        margin-top: 17px;
+    }
+    &__addToFavBtn {
+        width: 100%;
+        height: 30px;
+        background: #EDEDED;
+        border: none;
+        border-radius: 8px;
+        padding: 7px 10px 4px 10px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 18px;
+        color: $main-color;
+        white-space: nowrap;
+    }
+    &__bookBtn {
+        margin-top: 7px;
+        width: 100%;
+        height: 30px;
+        background: #EDEDED;
+        border: none;
+        border-radius: 8px;
+        background: #667BE9;
+        color: #fff;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+        padding: 5px;   
+    }
+}

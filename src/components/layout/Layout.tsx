@@ -14,7 +14,7 @@ export const Layout = () => {
                 <SideBar/>
                 <main className={st['main']}>
                     <Header sx={{maxWidth: '1160px'}}/>
-                    <Navbar/>
+                    {/* <Navbar/> */}
                     <Outlet/>
                 </main>
             </div>
