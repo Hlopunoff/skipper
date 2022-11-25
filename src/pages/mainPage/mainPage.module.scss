@@ -5,11 +5,10 @@
     column-gap: 30px;
     padding-bottom: 20px;
     &__left {
-        //! изменить на max-width
-        min-width: 371px;
+        max-width: 371px;
     }
     &__right {
-        width: 741px;
+        max-width: 741px;
     }
     &__header {
         width: 100%;
