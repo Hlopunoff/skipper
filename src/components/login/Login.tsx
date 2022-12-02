@@ -41,7 +41,7 @@ export const LoginWithPhone = () => {
                 <a href="#" className={st['login__recover']}>Забыли пароль?</a>
             </div>
             <button type="submit" className={st['login__submit']}>Войти</button>
-            <Link to="register" className={st['login__register']}>зарегистрироваться</Link>
+            <Link to="/auth/register" className={st['login__register']}>зарегистрироваться</Link>
             <div className={st['login__icons']}>
                 <img src={skypeIcon} alt="skype" className={st['login__icon']} />
                 <img src={skypeIcon} alt="skype" className={st['login__icon']} />

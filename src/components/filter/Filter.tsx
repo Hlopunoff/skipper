@@ -25,6 +25,7 @@ export const Filter = () => {
         setRating(newValue as number[]);
     };
 
+    //TODO Сделать обработчик события для выбора диапазона цены (при клике на определенную опцию, выбранная ранее перестает быть активной; value передавалось в локальное состояние)
     const selectPriceRange:React.MouseEventHandler<HTMLLIElement> = (e) => {
         e.stopPropagation();
 

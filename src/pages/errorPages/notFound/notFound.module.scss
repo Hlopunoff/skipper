@@ -1,0 +1,46 @@
+@import '../../../styles/colors';
+.error {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 85px;
+    background-color: #fff;
+    &__content {
+        text-align: center;
+    }
+    &__statusCode {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 200px;
+        line-height: 242px;
+        color: rgba(19, 106, 251, 1);
+    }
+    &__message {
+        font-style: normal;
+        font-weight: 800;
+        font-size: 42px;
+        line-height: 70px;
+        color: $main-color;
+    }
+    &__message {
+        font-style: normal;
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 19px;
+        color: $main-color;
+    }
+    &__btnBack {
+        padding: 18px 60px;
+        border: none;
+        background-color: $main-color;
+        color: #fff;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 26px;
+        text-decoration: none;
+    }
+}

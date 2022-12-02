@@ -1,4 +1,6 @@
 import {FC} from 'react';
+import {useAppDispatch, useAppSelector} from '../../hooks/redux';
+
 import { SingleLessonStat } from '../singleLessonStat/SingleLessonStat';
 import st from './lessonsStats.module.scss';
 
@@ -8,6 +10,8 @@ interface LessonsStatsProps {
 }
 
 export const LessonsStats: FC<LessonsStatsProps> = ({width, padding}) => {
+    const dispatch = useAppDispatch();
+    
     return (
         <div className={st['table']} style={{width, padding}}>
             <div className={st['table__head']}>

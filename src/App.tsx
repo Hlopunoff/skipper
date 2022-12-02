@@ -1,4 +1,6 @@
 import {Routes, Route} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import store from './store';
 
 import { Layout } from './components/layout/Layout';
 import { MainPage } from './pages/mainPage/MainPage';
@@ -7,22 +9,28 @@ import { MentorPage } from './pages/mentorPage/MentorPage';
 import { AuthPage } from './pages/authPage/AuthPage';
 import { LoginWithEmail, LoginWithPhone } from './components/login/Login';
 import { Register } from './components/register/Register';
+import { NotFound } from './pages/errorPages/notFound/NotFound';
 
 function App() {
   return (
     <>
-      <Routes>
-        <Route path='/' element={<Layout/>}>
-          <Route index element={<MainPage/>}/>
-          <Route path='mentee' element={<MentiPage/>}/>
-          <Route path='mentor' element={<MentorPage/>}/>
-        </Route>
-        <Route path='/auth' element={<AuthPage/>}>
-          <Route index element={<LoginWithEmail/>}/>
-          <Route path='login-phone' element={<LoginWithPhone/>}/>
-          <Route path='register' element={<Register />} />
-        </Route>
-      </Routes>
+      <Provider store={store}>
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index element={<MainPage />} />
+            <Route path='mentee' element={<MentiPage />} />
+            <Route path='mentor' element={<MentorPage />} >
+              <Route path=':mentorId' element={<MentorPage/>}/>
+            </Route>
+          </Route>
+          <Route path='/auth' element={<AuthPage />}>
+            <Route index element={<LoginWithEmail />} />
+            <Route path='login-phone' element={<LoginWithPhone />} />
+            <Route path='register' element={<Register />} />
+          </Route>
+          <Route path='*' element={<NotFound/>}/>
+        </Routes>
+      </Provider>
     </>
   );
 }
