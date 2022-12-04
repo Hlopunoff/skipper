@@ -304,4 +304,20 @@
             }
         }
     }
+    &__login {
+        text-decoration: none;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: $main-color;
+    }
+    &__register {
+        text-decoration: none;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: $main-color;
+    }
 }

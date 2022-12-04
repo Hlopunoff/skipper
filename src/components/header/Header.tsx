@@ -1,5 +1,7 @@
 import {useRef, FC} from 'react';
 import {Link} from 'react-router-dom';
+import {useAuth} from '../../hooks/use-auth';
+import { useAppSelector } from '../../hooks/redux';
 import {Badge} from '@mui/material';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
@@ -31,6 +33,8 @@ interface IHeaderProps {
 
 export const Header:FC<IHeaderProps> = ({sx}) => {
     const searchFieldRef = useRef<HTMLInputElement>(null);
+    const {isAuth, mentee} = useAuth();
+    const id = useAppSelector(state => state.user.user.mentee?.userId);
 
     const showSearchField = () => {
         if(searchFieldRef.current) {
@@ -124,13 +128,22 @@ export const Header:FC<IHeaderProps> = ({sx}) => {
                         </div>
                         <div className={st['header__profile']}>
                             <div className={st['info']}>
-                                <span className={st['username']}>Азамат Амаев</span>
-                                <span className={st['role']}>ментор</span>
+                                {!isAuth ? (
+                                    <>
+                                        <Link to="auth" className={st['header__login']}>Войти</Link>
+                                        <Link to="auth/register" className={st['header__register']}>Регистрация</Link>
+                                    </>
+                                ) : (
+                                    <>
+                                        <span className={st['username']}>{mentee?.username}</span>
+                                        <span className={st['role']}>менти</span>
+                                    </>
+                                )}
                             </div>
                             <div className={st['img-wrap']}>
-                                <img src={avatarPlug} alt="Фото пользователя" />
+                                <img src={mentee?.userPicture || avatarPlug} alt="Фото пользователя" />
                             </div>
-                            <div className={st['profile-dropdown']}>
+                            <div className={st['profile-dropdown']} style={!isAuth ? ({display: 'none'}) : undefined}>
                                 <div className={st['profile-dropdown__wrap']}>
                                     <ul className={st['profile-dropdown__list']}>
                                         <li className={st['profile-dropdown__item']}>
@@ -159,7 +172,7 @@ export const Header:FC<IHeaderProps> = ({sx}) => {
                                         <li className={st['profile-dropdown__item']}>
                                             <div className={st['profile-dropdown__info']}>
                                                 <CalendarTodayOutlinedIcon sx={{ gridRowStart: '1', gridRowEnd: '4', width: '24px', height: '25px' }} />
-                                                <Link to="mentee" className={st['profile-dropdown__name']}>Профиль</Link>
+                                                <Link to={`mentee/${id}`} className={st['profile-dropdown__name']}>Профиль</Link>
                                             </div>
                                         </li>
                                         <li className={st['profile-dropdown__item']}>

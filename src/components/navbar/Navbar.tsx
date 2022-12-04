@@ -9,7 +9,7 @@ const pathNamesData: any = {
 
 export const Navbar = () => {
     const location = useLocation();
-    const pathNames: string[] = [location.pathname[0], ...location.pathname.split('/')].filter(item => item);
+    const pathNames: string[] = [location.pathname[0], ...location.pathname.split('/')].filter(item => item && !+item);
 
     return (
         <nav className={st['navbar']}>

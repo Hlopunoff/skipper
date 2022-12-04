@@ -1,11 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit';
 import mentor from './slices/mentorSlice';
 import mentorList from './slices/mentorListSlice';
+import user from './slices/userSlice';
 
 const store = configureStore({
     reducer: {
         mentor,
         mentorList,
+        user,
     },
     devTools: process.env.NODE_ENV === 'development' ? true : false,
 });

@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {Navigate, useParams} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../../hooks/redux';
-import {getMentor} from '../../store/slices/mentorSlice';
+import {getMentor} from '../../store/slices/userSlice';
 
 import { Rating } from '../../UI/rating/Rating';
 import { LoaderCard } from '../loader/Loader';
@@ -17,17 +17,18 @@ export const MentorCard = () => {
     const {mentorId} = useParams();
     const {isLoading, isError, mentor} = useAppSelector(state => {
         return {
-            isLoading: state.mentor.isLoading,
-            isError: state.mentor.isError,
+            isLoading: state.user.isLoading,
+            isError: state.user.isError,
             mentor: {
-                username: state.mentor.mentor?.username,
-                id: state.mentor.mentor?.id,
-                speciality: state.mentor.mentor?.speciality,
-                timezone: state.mentor.mentor?.timezone,
-                studentNumber: state.mentor.mentor?.studentNumber,
-                registerDate: state.mentor.mentor?.registrationDate,
-                description: state.mentor.mentor?.description,
-                lessonsAmount: state.mentor.mentor?.stats.allLessons
+                username: state.user.user.mentor?.username,
+                id: state.user.user.mentor?.id,
+                speciality: state.user.user.mentor?.speciality,
+                timezone: state.user.user.mentor?.timezone,
+                studentNumber: state.user.user.mentor?.studentNumber,
+                registerDate: state.user.user.mentor?.registrationDate,
+                description: state.user.user.mentor?.description,
+                lessonsAmount: state.user.user.mentor?.stats?.allLessons,
+                rating: state.user.user.mentor?.rating,
             }
         }
     });
@@ -38,7 +39,7 @@ export const MentorCard = () => {
 
     const spinner = isLoading ? <LoaderCard/> : null;
     const err = isError ? <Error/> : null;
-    const redirect = !mentor.id ? <Navigate to="/*"/> : null;
+    // const redirect = !mentor.id ? <Navigate to="/*"/> : null;
     const content  = !(isLoading || isError || !mentor) ? (
         <div className={st['mentorCard']}>
             <div className={st['mentorCard__head']}>
@@ -57,7 +58,7 @@ export const MentorCard = () => {
                     <div className={st['mentorCard__fav']}>
                         <img src={heartImg} alt="Добавить в понравившиеся" />
                     </div>
-                    <Rating sx={{ justifyContent: 'flex-end' }} />
+                    <Rating sx={{ justifyContent: 'flex-end' }} rating={mentor.rating}/>
                     <div className={st['mentorCard__amount']}>
                         <span className={st['students']}>{mentor.studentNumber} студентов</span>
                         <span className={st['lessons']}>{mentor.lessonsAmount} занятий</span>
@@ -79,7 +80,7 @@ export const MentorCard = () => {
         <>
             {spinner}
             {err}
-            {redirect}
+            {/* {redirect} */}
             {content}
         </>
     );

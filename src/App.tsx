@@ -18,10 +18,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<MainPage />} />
-            <Route path='mentee' element={<MentiPage />} />
-            <Route path='mentor' element={<MentorPage />} >
-              <Route path=':mentorId' element={<MentorPage/>}/>
-            </Route>
+            <Route path='mentee/:menteeId' element={<MentiPage />} />
+            <Route path='mentor/:mentorId' element={<MentorPage />} />
           </Route>
           <Route path='/auth' element={<AuthPage />}>
             <Route index element={<LoginWithEmail />} />
