@@ -34,7 +34,7 @@ interface IHeaderProps {
 export const Header:FC<IHeaderProps> = ({sx}) => {
     const searchFieldRef = useRef<HTMLInputElement>(null);
     const {isAuth, mentee} = useAuth();
-    const id = useAppSelector(state => state.user.user.mentee?.userId);
+    const id = useAppSelector(state => state.user.user?.mentee?.userId);
 
     const showSearchField = () => {
         if(searchFieldRef.current) {
@@ -178,7 +178,7 @@ export const Header:FC<IHeaderProps> = ({sx}) => {
                                         <li className={st['profile-dropdown__item']}>
                                             <div className={st['profile-dropdown__info']}>
                                                 <CalendarTodayOutlinedIcon sx={{ gridRowStart: '1', gridRowEnd: '4', width: '24px', height: '25px' }} />
-                                                <h4 className={st['profile-dropdown__name']}>Настройки</h4>
+                                                <Link to="settings" className={st['profile-dropdown__name']}>Настройки</Link>
                                             </div>
                                         </li>
                                     </ul>

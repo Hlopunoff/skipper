@@ -3,7 +3,7 @@ import st from './rating.module.scss';
 import starImg from '../../assets/icons/star.svg';
 
 interface IRatingProps {
-    rating: number | string | undefined;
+    rating: number | string | undefined | null;
     sx: {
         justifyContent: string;
     };

@@ -14,7 +14,7 @@ export const MentiPage = () => {
                 <MenteeCard/>
                 <div className={st['mentiPage__info']}>
                     <MenteeInterests/>
-                    <LessonsStats width="100%" padding="30px 42px 54px 26px" />
+                    <LessonsStats width="100%" padding="30px 42px 54px 26px" relatedTo="mentee"/>
                     <Reviews />
                     <CreateReview/>
                 </div>

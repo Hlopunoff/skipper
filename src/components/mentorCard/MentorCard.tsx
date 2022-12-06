@@ -1,7 +1,8 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {Navigate, useParams} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../../hooks/redux';
-import {getMentor} from '../../store/slices/userSlice';
+import {getMentorInfo} from '../../store/slices/userSlice';
+import {getMentor} from '../../store/slices/mentorSlice';
 
 import { Rating } from '../../UI/rating/Rating';
 import { LoaderCard } from '../loader/Loader';
@@ -15,26 +16,41 @@ import heartImg from '../../assets/icons/heart.svg';
 export const MentorCard = () => {
     const dispatch = useAppDispatch();
     const {mentorId} = useParams();
+    const [currentTime, setCurrentTime] = useState([0, 0]);
     const {isLoading, isError, mentor} = useAppSelector(state => {
         return {
             isLoading: state.user.isLoading,
             isError: state.user.isError,
             mentor: {
-                username: state.user.user.mentor?.username,
-                id: state.user.user.mentor?.id,
-                speciality: state.user.user.mentor?.speciality,
-                timezone: state.user.user.mentor?.timezone,
-                studentNumber: state.user.user.mentor?.studentNumber,
-                registerDate: state.user.user.mentor?.registrationDate,
-                description: state.user.user.mentor?.description,
-                lessonsAmount: state.user.user.mentor?.stats?.allLessons,
-                rating: state.user.user.mentor?.rating,
+                username: state.user.user!.mentor?.username,
+                id: state.user.user!.mentor?.id,
+                speciality: state.user.user!.mentor?.speciality,
+                timezone: state.user.user!.mentor?.timezone,
+                studentNumber: state.user.user!.mentor?.studentNumber,
+                registerDate: state.user.user!.mentor?.registrationDate,
+                description: state.user.user!.mentor?.description,
+                lessonsAmount: state.user.user!.mentor?.stats?.allLessons,
+                rating: state.user.user!.mentor?.rating,
             }
         }
     });
 
     useEffect(() => {
-        dispatch(getMentor(mentorId));
+        dispatch(getMentorInfo(mentorId));
+
+        const setInitialUTCTime = setTimeout(() => {
+            setCurrentTime([new Date().getUTCHours(), new Date().getUTCMinutes()]);
+        }, 0);
+
+        return () => clearTimeout(setInitialUTCTime);
+    }, []);
+
+    useEffect(() => {
+        const getCurrentTime = setInterval(() => {
+            setCurrentTime([new Date().getUTCHours(), new Date().getUTCMinutes()]);
+        }, 20000);
+
+        return () => clearInterval(getCurrentTime);
     }, []);
 
     const spinner = isLoading ? <LoaderCard/> : null;
@@ -51,7 +67,7 @@ export const MentorCard = () => {
                         <h3 className={st['mentorCard__name']}>{mentor.username}</h3>
                         <span className={st['mentorCard__status']}><div className={st['indicator']}></div> Онлайн</span>
                         <p className={st['mentorCard__specialty']}>{mentor.speciality}</p>
-                        <span className={st['mentorCard__timezone']}>Время пользователя {mentor.timezone} | GMT+4</span>
+                        <span className={st['mentorCard__timezone']}>Время пользователя {currentTime[0]}:{currentTime[1]} | GMT+{mentor.timezone}</span>
                     </div>
                 </div>
                 <div className="mentorCard__right">

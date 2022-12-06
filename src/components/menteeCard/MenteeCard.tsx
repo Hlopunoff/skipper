@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks/redux';
 import { useParams } from 'react-router-dom';
-import { getMentee } from '../../store/slices/userSlice';
+import { getMenteeInfo } from '../../store/slices/userSlice';
 
 import { Rating } from '../../UI/rating/Rating';
 import {LoaderCard} from '../loader/Loader';
@@ -13,19 +13,21 @@ import mentorImgPlug from '../../assets/img/avatar_plug.jpg';
 export const MenteeCard = () => {
     const dispatch = useAppDispatch();
     const {menteeId} = useParams();
-    const {isLoading, isError, mentee, accessToken} = useAppSelector(state => {
+    const {isLoading, isError, mentee, accessToken, refreshToken} = useAppSelector(state => {
         return {
             isLoading: state.user.isLoading,
             isError: state.user.isError,
-            mentee: state.user.user.mentee,
-            accessToken: state.user.user.accessToken,
+            mentee: state.user.user!.mentee,
+            accessToken: state.user.user!.accessToken,
+            refreshToken: state.user.user!.refreshToken,
         };
     });
 
     useEffect(() => {
-        dispatch(getMentee({
+        dispatch(getMenteeInfo({
             id: menteeId,
-            accessToken
+            accessToken,
+            refreshToken,
         }));
     }, []);
 

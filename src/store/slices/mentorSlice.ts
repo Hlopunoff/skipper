@@ -1,16 +1,12 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import { IInitial } from '../../models/IInitial';
 import { IMentor } from '../../models/IMentor';
 
-interface IInitialMentor {
-    isLoading: boolean;
-    isError: boolean;
-    mentor: IMentor | null;
-}
 
-const initialState: IInitialMentor = {
+const initialState: IInitial<IMentor> = {
     isLoading: true,
-    isError: false,
-    mentor: null,
+    isError: '',
+    user: undefined,
 };
 
 export const getMentor = createAsyncThunk(
@@ -40,15 +36,15 @@ const mentorSlice = createSlice({
     extraReducers: builder => {
         builder.addCase(getMentor.pending, state => {
             state.isLoading = true;
-            state.isError = false;
+            state.isError = '';
         })
         .addCase(getMentor.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.mentor = action.payload;
+            state.user = action.payload;
         })
         .addCase(getMentor.rejected, state => {
             state.isLoading = false;
-            state.isError = true;
+            state.isError = '';
         });
     }
 });

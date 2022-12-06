@@ -4,9 +4,9 @@ import st from './singleLessonStat.module.scss';
 
 interface SingleLessonStatProps {
     title: string;
-    lastMonth: number | string;
-    lastThreeMonth: number | string;
-    allTime: number | string;
+    lastMonth: number | string | null;
+    lastThreeMonth: number | string | null;
+    allTime: number | string | null;
 }
 
 export const SingleLessonStat: FC<SingleLessonStatProps> = ({title, lastMonth, lastThreeMonth, allTime}) => {

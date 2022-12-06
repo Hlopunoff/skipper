@@ -1,0 +1,14 @@
+.settings {
+    &__content {
+        width: 100%;
+        display: flex;
+        column-gap: 110px;
+        background-color: #fff;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+        border-radius: 8px;
+    }
+    &__roadmap {
+        //! убрать, когда сделаю компонент
+        width: 270px;
+    }
+}

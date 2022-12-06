@@ -1,13 +1,7 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { IUser } from '../../models/IUser';
 import jwtDecode from 'jwt-decode';
-
-interface IUserInitial {
-    isLoading: boolean;
-    isError: string;
-    user: IUser;
-}
-
+import { IInitial } from '../../models/IInitial';
 interface IUserRegInfo {
     phoneNumber: string;
     password: string;
@@ -23,9 +17,10 @@ interface IUserAuthInfo {
 interface IMenteeGetInfo {
     id: string | number | undefined;
     accessToken: string | null;
+    refreshToken: string | undefined;
 }
 
-const initialState: IUserInitial = {
+const initialState: IInitial<IUser> = {
     isLoading: true,
     isError: '',
     user: {
@@ -84,7 +79,7 @@ export const authUser = createAsyncThunk(
     }
 );
 
-export const getMentee = createAsyncThunk(
+export const getMenteeInfo = createAsyncThunk(
     'user/mentee',
     async ({id, accessToken} : IMenteeGetInfo, {rejectWithValue}) => {
         try {
@@ -107,7 +102,7 @@ export const getMentee = createAsyncThunk(
     }
 );
 
-export const getMentor = createAsyncThunk(
+export const getMentorInfo = createAsyncThunk(
     'user/mentor',
     async (id: number | string | undefined, {rejectWithValue}) => {
         try {
@@ -151,27 +146,27 @@ const userSlice = createSlice({
             state.isLoading = false;
             state.isError = action.payload as string;
         })
-        .addCase(getMentee.pending, state => {
+        .addCase(getMenteeInfo.pending, state => {
             state.isLoading = true;
             state.isError = '';
         })
-        .addCase(getMentee.fulfilled, (state, action) => {
-            state.user.mentee = {...state.user.mentee, ...action.payload};
+        .addCase(getMenteeInfo.fulfilled, (state, action) => {
+            state.user!.mentee = {...state.user!.mentee, ...action.payload};
             state.isLoading = false;
         })
-        .addCase(getMentee.rejected, (state, action) => {
+        .addCase(getMenteeInfo.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = action.payload as string;
         })
-        .addCase(getMentor.pending, state => {
+        .addCase(getMentorInfo.pending, state => {
             state.isLoading = true;
             state.isError = '';
         })
-        .addCase(getMentor.fulfilled, (state, action) => {
-            state.user.mentor = action.payload;
+        .addCase(getMentorInfo.fulfilled, (state, action) => {
+            state.user!.mentor = action.payload;
             state.isLoading = false;
         })
-        .addCase(getMentor.rejected, (state, action) => {
+        .addCase(getMentorInfo.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = action.payload as string;
         });

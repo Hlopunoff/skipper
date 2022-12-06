@@ -9,9 +9,10 @@ import { ProfileReport } from '../../components/profileReport/ProfileReport';
 import { Consultation } from '../../components/consultation/Consultation';
 import { Schedule } from '../../components/schedule/Schedule';
 import { Modal } from '../../components/modal/Modal';
-import { SwitchRoles } from '../../components/switchRoles/SwitchRoles';
+import { CreateReview } from '../../components/createReview/CreateReview';
 
 import st from './mentorPage.module.scss';
+
 
 
 export const MentorPage = () => {
@@ -24,14 +25,14 @@ export const MentorPage = () => {
                     <div className={st['mentorPage__content']}>
                         <div className={st['mentorPage__info']}>
                             <MentorCard />
-                            <LessonsStats width='100%' padding='30px 42px 0px 26px' />
+                            <LessonsStats width='100%' padding='30px 42px 0px 26px' relatedTo='mentor'/>
                             <PriceList />
                             <MentorResume />
                             <Reviews />
+                            <CreateReview/>
                             <ProfileReport />
                         </div>
                         <div className={st['mentorPage__cla']}>
-                            <SwitchRoles/>
                             <Consultation modalRef={modalRef}/>
                             <Schedule />
                         </div>

@@ -42,6 +42,10 @@
         font-size: 22px;
         line-height: 27px;
         text-transform: uppercase;
+        &:disabled {
+            background-color: #b3b3b3;
+            cursor: auto;
+        }
     }
     &__contact {
         width: 100%;
