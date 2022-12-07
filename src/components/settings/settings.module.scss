@@ -1,0 +1,436 @@
+@import '../../styles/colors';
+.settings {
+    & input, & select {
+        padding: 3px 10px;
+        height: 33px;
+        background-color: #fff;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #8E8E8E;
+        border: 1px solid #AEAEAE;
+        border-radius: 5px;
+        height: 33px;
+    }
+    &__form {
+        display: flex;
+        flex-direction: column;
+        row-gap: 60px;
+        max-width: 657px;
+    }
+    &__section {
+        display: flex;
+        flex-direction: column;
+        row-gap: 40px;
+    }
+    &__title {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 27px;
+        color: #000;
+        text-transform: uppercase;
+    }
+    &__img {
+        display: flex;
+        column-gap: 30px;
+        &Wrap {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 1px solid rgba(122, 122, 122, 0.2);
+            & img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                object-fit: contain;
+            }
+        }
+        &Upload {
+            display: inline-block;
+            margin-top: 10px;
+            width: 120px;
+            height: 33px;
+            background-color: #fff;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: $main-color;
+            padding: 7px 2px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+            border-radius: 8px;
+            border: 1px solid #000;
+            cursor: pointer;
+            & input {
+            display: none;
+            }
+        }
+        &Subtitle {
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 19px;
+            color: #000;
+        }
+        &MaxSize {
+            display: inline-block;
+            margin-top: 12px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: $main-color;
+        }
+        &Permission {
+            display: block;
+            margin-top: 50px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: $main-color;
+        }
+        &Icons {
+            margin-top: 12px;
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            column-gap: 15px;
+        }
+        &Icon {
+            width: 33px;
+            height: 33px;
+            border-radius: 50%;
+            & img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+    &__generalInfoField {
+        display: grid;
+        grid-template-columns: 219px 1fr;
+    }
+    &__label {
+        text-align-last: left;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+        color: #000;
+        cursor: pointer;
+        & span {
+            font-weight: 400;
+        }
+    }
+    &__fields {
+        display: flex;
+        align-items: center;
+        column-gap: 7px;
+    }
+    &__nameField {
+        max-width: 140px;
+    }
+    &__surnameField {
+        max-width: 140px;
+    }
+    &__patronymic {
+        max-width: 140px;
+    }
+    &__timezoneField {
+        width: 262px;
+    }
+    &__aboutMenteeField {
+        width: 100%;
+        height: 120px;
+        resize: none;
+        padding: 7px 12px;
+        background: #FFFFFF;
+        border: 1px solid #AEAEAE;
+        border-radius: 5px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #8E8E8E;
+    }
+    &__accountInfo {
+        display: grid;
+        grid-template-columns: 219px 1fr;
+    }
+    &__emailField {
+        width: 262px;
+    }
+    &__phoneField {
+        width: 262px;
+    }
+    &__confirmFieldBtn {
+        width: 120px;
+        height: 33px;
+        background-color: #fff;
+        background: #FFFFFF;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+        border-radius: 8px;
+        border: 1px solid $main-color;
+        color: $main-color;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        &_confirmed {
+            border: none;
+            cursor: auto;
+            color: #7FC936;
+            background-color: #fff;
+            box-shadow: none;
+        }
+    }
+    &__changePassword {
+        width: 166px;
+        height: 33px;
+        background-color: #fff;
+        background: #FFFFFF;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+        border-radius: 8px;
+        border: 1px solid $main-color;
+        color: $main-color;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+    }
+    &__deleteAccount {
+        width: 166px;
+        height: 33px;
+        background-color: #fff;
+        background: #FFFFFF;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
+        border-radius: 8px;
+        border: 1px solid $main-color;
+        color: $main-color;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+    }
+    &__notificationsInfo {
+        display: grid;
+        grid-template-columns: 219px 1fr;
+        & .settings__fields {
+            flex-direction: column;
+            row-gap: 10px;
+            align-items: flex-start;
+        }
+    }
+    &__notificationsPermission {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #000;
+    }
+    &__notificationsWarning {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #7E7E7E;
+    }
+    &__notificationLesson {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+        & input {
+            width: 19px;
+            height: 19px;
+            accent-color: $main-purple;
+        }
+        & label {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: #000;
+            cursor: pointer;
+        }
+    }
+    &__communication {
+        display: grid;
+        grid-template-columns: 219px 1fr;
+        & .settings__fields {
+            column-gap: 20px;
+        }
+    }
+    &__skypeName {
+        width: 176px;
+    }
+    &__hangoutsId {
+        width: 176px;
+    }
+    &__btnDelete {
+        background-color: #fff;
+        border: none;
+        color: #D75656;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+    }
+    &__addNewWayOf {
+        display: block;
+        text-align-last: left;
+        background-color: #fff;
+        border: none;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #000;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    &__wallet {
+        display: grid;
+        grid-template-columns: 219px 1fr;
+    }
+    &__creditCard {
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+        &Info {
+            margin-right: 10px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: #8E8E8E;
+        }
+    }
+    &__displayCurrency {
+        width: 262px;
+    }
+    &__amountOfMoney {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        color: #000;
+    }
+    &__mentor {
+        display: grid;
+        grid-template-columns: 219px 1fr;
+        & .settings__addNewWayOf {
+            margin-top: 25px;
+        }
+        &Status {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: #7FC936;
+        }
+        &AboutMe {
+            width: 100%;
+            height: 120px;
+            resize: none;
+            padding: 7px 12px;
+            background: #FFFFFF;
+            border: 1px solid #AEAEAE;
+            border-radius: 5px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: #8E8E8E;
+        }
+        &Specialty {
+            width: 100%;
+            height: 60px;
+            resize: none;
+            padding: 7px 12px;
+            background: #FFFFFF;
+            border: 1px solid #AEAEAE;
+            border-radius: 5px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 17px;
+            color: #8E8E8E;
+        }
+    }
+    &__lessonTypes {
+        display: flex;
+        flex-direction: column;
+        row-gap: 25px;
+    }
+    &__lessonType {
+        display: flex;
+        align-items: center;
+        column-gap: 15px;
+    }
+    &__workingExps {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 25px;
+    }
+    &__workingExp {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &Info {
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+        }
+    }
+    &__educations {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 25px;
+    }
+    &__education {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &Info {
+            display: flex;
+            flex-direction: column;
+            row-gap: 10px;
+            max-width: 295px;
+        }
+    }
+    &__certificates {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 25px;
+    }
+    &__certificate {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__extraInfos {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 25px;
+    }
+    &__extraInfo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__mentorAchievement {
+        display: inline-block;
+        max-width: 325px;
+    }
+}
