@@ -1,3 +1,5 @@
+import {useRef, useEffect, useState, FC} from 'react';
+
 import Switch from '@mui/material/Switch';
 
 import st from './settings.module.scss';
@@ -6,10 +8,29 @@ import skypeIcon from '../../assets/img/skype.png';
 import creditCardIcon from '../../assets/img/creditCard.png';
 import certificateImg from '../../assets/img/certificate.png';
 
-export const Settings = () => {
+interface ISettingsProps {
+    getEndpoints: (data: number[]) => void;
+}
+
+export const Settings:FC<ISettingsProps> = ({getEndpoints}) => {
+    const settingsFormRef = useRef<HTMLFormElement>(null);
+
+    useEffect(() => {
+        if(settingsFormRef.current) {
+            const endpoints: number[] = [];
+
+            settingsFormRef.current?.childNodes.forEach(child => {
+                //TODO Пофиксить баг с отображением
+                endpoints.push((child as HTMLDivElement).scrollTop);
+            });
+            getEndpoints(endpoints);
+        }  
+    }, []);
+    
+
     return (
         <div className={st['settings']}>
-            <form action="POST" className={st['settings__form']}>
+            <form action="POST" className={st['settings__form']} ref={settingsFormRef}>
                 <div className={st['settings__section']}>
                     <h3 className={st['settings__title']}>Общая информация</h3>
                     <div className={st['settings__img']}>
@@ -113,7 +134,29 @@ export const Settings = () => {
                     <div className={st['settings__notificationsInfo']}>
                         <label htmlFor="" className={st['settings__label']}>Браузер</label>
                         <div className={st['settings__fields']}>
-                            <Switch/>
+                            <Switch sx={{
+                                '& .MuiSwitch-thumb': {
+                                    color: '#7E72F2',
+                                    height: '15px',
+                                    width: '15px',
+                                    marginTop: '4px'
+
+                                },
+                                '& .MuiSwitch-track': {
+                                    backgroundColor: '#fff',
+                                    border: '1px solid #9E9E9E',
+                                    height: '17px',
+                                    width: '28px',
+                                    borderRadius: '15px'
+                                },
+                                '& .PrivateSwitchBase-input': {
+                                    margin: '0px',
+                                    padding: '0px'
+                                },
+                                '& .css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track': {
+                                    backgroundColor: 'rgb(143, 133, 236)'
+                                }
+                            }} />
                             <span className={st['settings__notificationsPermission']}>Разрешить Skipper уведомлять вас в браузере</span>
                             <p className={st['settings__notificationsWarning']}>Мы предупредим вас о начала занятия за 2 часа, чтобы вы ничего не пропустили.<b>Внимание!</b> Данная настройка включается и выключается в настройках вашего браузера!</p>
                         </div>
@@ -190,7 +233,29 @@ export const Settings = () => {
                     <div className={st['settings__mentor']}>
                         <label htmlFor="" className={st['settings__label']}>Текущий статус</label>
                         <div className={st['settings__fields']}>
-                            <Switch />
+                            <Switch sx={{
+                                '& .MuiSwitch-thumb': {
+                                    color: '#7E72F2',
+                                    height: '15px',
+                                    width: '15px',
+                                    marginTop: '4px'
+
+                                },
+                                '& .MuiSwitch-track': {
+                                    backgroundColor: '#fff',
+                                    border: '1px solid #9E9E9E',
+                                    height: '17px',
+                                    width: '28px',
+                                    borderRadius: '15px'
+                                },
+                                '& .PrivateSwitchBase-input': {
+                                    margin: '0px',
+                                    padding: '0px'
+                                },
+                                '& .css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track': {
+                                    backgroundColor: 'rgb(143, 133, 236)'
+                                }
+                            }}/>
                             <span className={st['settings__mentorStatus']}>Активный <img src="" alt="" className="tip" /></span>
                         </div>
                     </div>

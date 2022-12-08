@@ -1,0 +1,76 @@
+@import '../../styles/colors';
+.menu {
+    position: fixed;
+    width: 270px;
+    &__list {
+        position: relative;
+        padding-left: 23px;
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        row-gap: 43px;
+        & .steps {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            left: 7px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #DADADA;
+        }
+        .settingsStep {
+            width: 15px;
+            height: 15px;
+            background-color: #fff;
+            border-radius: 50%;
+            border: 1px solid #D8D8D8;
+            &_current {
+                background-color: $main-purple;
+                border: 1px solid $main-purple;
+            }
+        }
+    }
+    &__settingsItem {
+        user-select: none;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+        color: #C4C4C4;
+        &_current {
+            color: #000;
+        }
+    }
+    &__cla {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 12px;
+    }
+    &__confirmChanges {
+        width: 100%;
+        height: 42px;
+        border: none;
+        border-radius: 6px;
+        background-color: $main-purple;
+        color: #fff;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 27px;
+    }
+    &__cancelChanges {
+        background-color: #fff;
+        width: 100%;
+        height: 42px;
+        border: none;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        color: #000;
+    }
+}

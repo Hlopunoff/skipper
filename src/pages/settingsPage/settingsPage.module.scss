@@ -1,5 +1,7 @@
 .settings {
     &__content {
+        position: relative;
+        padding: 20px 20px 100px 20px;
         width: 100%;
         display: flex;
         column-gap: 110px;
@@ -8,7 +10,6 @@
         border-radius: 8px;
     }
     &__roadmap {
-        //! убрать, когда сделаю компонент
         width: 270px;
     }
 }
