@@ -76,8 +76,8 @@ export const LoginWithPhone = () => {
             </div>
             <button type="submit" className={st['login__submit']} onClick={(e) => {
                 e.preventDefault();
-                dispatch(authUser({username: `+7${phoneNumber}`, password}));
-                navigate('/');
+                dispatch(authUser({username: `+7${phoneNumber}`, password}))
+                .then(() => navigate('/'));
             }}>Войти</button>
             <Link to="/auth/register" className={st['login__register']}>зарегистрироваться</Link>
             <div className={st['login__icons']}>

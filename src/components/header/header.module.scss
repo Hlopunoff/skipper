@@ -311,6 +311,9 @@
         font-size: 14px;
         line-height: 17px;
         color: $main-color;
+        &:hover {
+            color: rgb(102, 123, 233);
+        }
     }
     &__register {
         text-decoration: none;
@@ -319,5 +322,8 @@
         font-size: 14px;
         line-height: 17px;
         color: $main-color;
+        &:hover {
+            color: rgb(102, 123, 233);
+        }
     }
 }

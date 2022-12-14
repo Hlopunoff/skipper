@@ -13,8 +13,9 @@ import mentor from './slices/mentorSlice';
 import mentorList from './slices/mentorListSlice';
 import user from './slices/userSlice';
 import mentee from './slices/menteeSlice';
+import filter from './slices/filterSlice';
 
-const rootReducer = combineReducers({mentor, mentorList, mentee, user});
+const rootReducer = combineReducers({mentor, mentorList, mentee, user, filter});
 
 const persistConfig = {
     key: 'root',

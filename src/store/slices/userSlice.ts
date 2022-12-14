@@ -2,6 +2,7 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import { IUser } from '../../models/IUser';
 import jwtDecode from 'jwt-decode';
 import { IInitial } from '../../models/IInitial';
+import { IUserSettings } from '../../models/IUserSettings';
 interface IUserRegInfo {
     phoneNumber: string;
     password: string;
@@ -18,6 +19,13 @@ interface IMenteeGetInfo {
     id: string | number | undefined;
     accessToken: string | null;
     refreshToken: string | undefined;
+}
+
+interface IChangeUser {
+    id: string | number | undefined;
+    accessToken: string | undefined | null;
+    refreshToken: string | undefined;
+    body: IUserSettings | undefined;
 }
 
 const initialState: IInitial<IUser> = {
@@ -66,6 +74,7 @@ export const authUser = createAsyncThunk(
             }
 
             const data = await res.json();
+            console.log(jwtDecode<any>(data.accessToken));
             const result = {
                 accessToken: data.accessToken,
                 refreshToken: data.refreshToken,
@@ -102,6 +111,29 @@ export const getMenteeInfo = createAsyncThunk(
     }
 );
 
+export const changeUserInfo = createAsyncThunk(
+    'user/changeUser',
+    async ({id, accessToken, body} : IChangeUser, {rejectWithValue}) => {
+        try {
+            const res = await fetch(`http://45.12.4.230/api/users/${id}/settings`, {
+                method: 'PUT',
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-Type": "application/json",
+                    "AUTHORIZATION": `Bearer ${accessToken}`,
+                }
+            });
+
+            if(!res.ok) {
+                throw new Error(`Не получилось изменить настройки у этого пользователя ${id}`);
+            }
+
+        } catch (error) {
+            return rejectWithValue((error as Error).message);
+        }
+    }
+);
+
 export const getMentorInfo = createAsyncThunk(
     'user/mentor',
     async (id: number | string | undefined, {rejectWithValue}) => {
@@ -122,7 +154,16 @@ export const getMentorInfo = createAsyncThunk(
 const userSlice = createSlice({
     name: 'user',
     initialState,
-    reducers: {},
+    reducers: {
+        userLogout: (state) => {
+            if(state.user) {
+                state.user.accessToken = '';
+                state.user.refreshToken = '';
+                state.user.mentee = undefined;
+                state.user.mentor = undefined;
+            }
+        },
+    },
     extraReducers: builder => {
         builder.addCase(registerUser.pending, state => {
             state.isLoading = true;
@@ -174,4 +215,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const {} = userSlice.actions;
+export const {userLogout} = userSlice.actions;

@@ -12,4 +12,6 @@ export interface IMentee {
     exp: number;
     roles: 'USER' | 'ADMIN' | 'MODERATOR';
     userId: number;
+    phoneNumber: string | null;
+    sub: string | null;
 }

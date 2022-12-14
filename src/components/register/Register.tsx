@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks/redux';
 import {registerUser} from '../../store/slices/userSlice';
 
@@ -8,6 +8,7 @@ import st from './register.module.scss';
 import skypeIcon from '../../assets/img/skype.png';
 
 export const Register = () => {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
@@ -41,7 +42,8 @@ export const Register = () => {
             <div className={st['register__forwarding']}>
                 <button className={st['register__register']} type="submit" onClick={(e) => {
                     e.preventDefault();
-                    dispatch(registerUser({phoneNumber: `+7${phoneNumber}`, password}));
+                    dispatch(registerUser({phoneNumber: `+7${phoneNumber}`, password}))
+                    .then(() => navigate('/auth/login-phone'));
                 }}>Зарегистрироваться</button>
                 <Link to='/auth' className={st['register__login']}>Войти</Link>
             </div>

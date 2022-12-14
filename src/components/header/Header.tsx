@@ -1,7 +1,8 @@
 import {useRef, FC} from 'react';
 import {Link} from 'react-router-dom';
 import {useAuth} from '../../hooks/use-auth';
-import { useAppSelector } from '../../hooks/redux';
+import {userLogout} from '../../store/slices/userSlice';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import {Badge} from '@mui/material';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
@@ -32,6 +33,7 @@ interface IHeaderProps {
 }
 
 export const Header:FC<IHeaderProps> = ({sx}) => {
+    const dispatch = useAppDispatch();
     const searchFieldRef = useRef<HTMLInputElement>(null);
     const {isAuth, mentee} = useAuth();
     const id = useAppSelector(state => state.user.user?.mentee?.userId);
@@ -135,7 +137,8 @@ export const Header:FC<IHeaderProps> = ({sx}) => {
                                     </>
                                 ) : (
                                     <>
-                                        <span className={st['username']}>{mentee?.username}</span>
+                                        <span className={st['username']}>
+                                            {mentee?.username.startsWith('+7') ? `${mentee.username.slice(0,2)}(${mentee.username.slice(2,5)})${mentee.username.slice(5,8)}-${mentee.username.slice(8,10)}-${mentee.username.slice(10)}` : mentee?.username}</span>
                                         <span className={st['role']}>менти</span>
                                     </>
                                 )}
@@ -184,7 +187,9 @@ export const Header:FC<IHeaderProps> = ({sx}) => {
                                     </ul>
                                     <div className={st['profile-dropdown__cla']}>
                                         <a href="#" className={st['profile-dropdown__tech-help']}>Техническая поддержка</a>
-                                        <a href="#" className={st['profile-dropdown__logout']}>Выйти</a>
+                                        <Link to="/" className={st['profile-dropdown__logout']} onClick={() => {
+                                            dispatch(userLogout());
+                                        }}>Выйти</Link>
                                     </div>
                                 </div>
                             </div>

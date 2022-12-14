@@ -2,20 +2,21 @@ import { useState } from 'react';
 
 import { Settings } from '../../components/settings/Settings';
 import { SettingsMenu } from '../../components/settingsMenu/SettingsMenu';
+import { IUserSettings } from '../../models/IUserSettings';
 
 import st from './settingsPage.module.scss';
 
 export const SettingsPage = () => {
-    const [endpoints, setEndpoints] = useState<number[]>([]);
+    const [settings, setSettings] = useState<IUserSettings>();
 
     return (
         <section className={st['settings']}>
             <div className="container">
                 <div className={st['settings__content']}>
                     <div className={st['settings__roadmap']}>
-                        <SettingsMenu endpoints={endpoints}/>
+                        <SettingsMenu settings={settings}/>
                     </div>
-                    <Settings getEndpoints={(data: number[]) => {setEndpoints(data)}}/>
+                    <Settings setSettings={(settings:IUserSettings) => setSettings(settings)}/>
                 </div>
             </div>
         </section>

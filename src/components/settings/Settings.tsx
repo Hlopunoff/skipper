@@ -1,4 +1,6 @@
-import {useRef, useEffect, useState, FC} from 'react';
+import {useState, FC} from 'react';
+import { IUserSettings } from '../../models/IUserSettings';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 
 import Switch from '@mui/material/Switch';
 
@@ -9,29 +11,95 @@ import creditCardIcon from '../../assets/img/creditCard.png';
 import certificateImg from '../../assets/img/certificate.png';
 
 interface ISettingsProps {
-    getEndpoints: (data: number[]) => void;
+    setSettings: (settings: any) => void;
 }
 
-export const Settings:FC<ISettingsProps> = ({getEndpoints}) => {
-    const settingsFormRef = useRef<HTMLFormElement>(null);
+export const Settings:FC<ISettingsProps> = ({setSettings}) => {
+    const {menteeInfo, mentorInfo, id} = useAppSelector(state => {
+        return {
+            id: state.user.user?.mentee?.userId,
+            menteeInfo: state.user.user?.mentee,
+            mentorInfo: state.user.user?.mentor,
+        }
+    });
+    const [username, setUsername] = useState('');
+    const [usersurname, setUsersurname] = useState('');
+    const [userpatronymic, setUserpatronymic] = useState('');
+    const [userDay, setUserDay] = useState('');
+    const [userMonth, setUserMonth] = useState('');
+    const [userYear, setUserYear] = useState('');
+    const [userTimezone, setUserTimezone] = useState('');
+    const [userDesc, setUserDesc] = useState('');
+    const [userEmail, setUserEmail] = useState('');
+    const [userPhone, setUserPhone] = useState('');
+    const [userPassword, setUserPassword] = useState('');
+    const [userBalance, setUserBalance] = useState('0');
 
-    useEffect(() => {
-        if(settingsFormRef.current) {
-            const endpoints: number[] = [];
+    const collectData = () => {
+        const data:IUserSettings = {
+            username: `${username} ${usersurname} ${userpatronymic}`,
+            birthdate: `${userDay}-${userMonth}-${userYear}`,
+            balance: +userBalance,
+            timeZone: `${userTimezone}`,
+            email: `${userEmail}`,
+            description: `${userDesc}`,
+            phoneNumber: `${userPhone || menteeInfo?.sub}`,
+            id,
+        }
 
-            settingsFormRef.current?.childNodes.forEach(child => {
-                //TODO Пофиксить баг с отображением
-                endpoints.push((child as HTMLDivElement).scrollTop);
-            });
-            getEndpoints(endpoints);
-        }  
-    }, []);
-    
+        setSettings(data);
+    }
+
+    const handleSettingsInput = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>, fieldName: string) => {
+        const {value} = e.target;
+
+        switch (fieldName) {
+            case 'username':
+                setUsername(value);
+                break;
+            case 'usersurname':
+                setUsersurname(value);
+                break;
+            case 'userpatronymic':
+                setUserpatronymic(value);
+                break;
+            case 'userDay':
+                setUserDay(value);
+                break;
+            case 'userMonth':
+                setUserMonth(value);
+                break;
+            case 'userYear':
+                setUserYear(value);
+                break;
+            case 'userTimezone': 
+                setUserTimezone(value);
+                break;
+            case 'userDesc':
+                setUserDesc(value);
+                break;
+            case 'userEmail':
+                setUserEmail(value);
+                break;
+            case 'userPhone':
+                setUserPhone(value);
+                break;
+            case 'userPassword':
+                setUserPassword(value);
+                break;
+            case 'userBalance': 
+                setUserBalance(value);
+                break;
+            default:
+                return;
+        }
+        collectData();
+    };
 
     return (
         <div className={st['settings']}>
-            <form action="POST" className={st['settings__form']} ref={settingsFormRef}>
-                <div className={st['settings__section']}>
+            <form action="POST" className={st['settings__form']}>
+                <div className={st['settings__section']} id="generalInfo" data-name="settingsSection">
                     <h3 className={st['settings__title']}>Общая информация</h3>
                     <div className={st['settings__img']}>
                         <div className="settings__imgPreview">
@@ -58,9 +126,9 @@ export const Settings:FC<ISettingsProps> = ({getEndpoints}) => {
                         <div className={st['settings__generalInfoField']}>
                             <label htmlFor="name" className={st['settings__label']}>Ваше полное имя</label>
                             <div className={st['settings__fields']}>
-                                <input type="text" className={st['settings__nameField']} id="name" placeholder='Имя' />
-                                <input type="text" className={st['settings__surnameField']} placeholder='Фамилия' />
-                                <input type="text" className={st['settings__patronymic']} placeholder='Отчество' />
+                                <input type="text" className={st['settings__nameField']} id="name" name='name' placeholder='Имя' onChange={(e) => handleSettingsInput(e, 'username')} value={username}/>
+                                <input type="text" className={st['settings__surnameField']} name="surname" placeholder='Фамилия' onChange={(e) => handleSettingsInput(e, 'usersurname')} value={usersurname}/>
+                                <input type="text" className={st['settings__patronymic']} name="patronymic" placeholder='Отчество' onChange={(e) => handleSettingsInput(e, 'userpatronymic')} value={userpatronymic}/>
                             </div>
                         </div>
                     </div>
@@ -68,15 +136,25 @@ export const Settings:FC<ISettingsProps> = ({getEndpoints}) => {
                         <div className={st['settings__generalInfoField']}>
                             <label htmlFor="dayOfBirth" className={st['settings__label']}>Дата рождения</label>
                             <div className={st['settings__fields']}>
-                                <select className={st['settings__dayOfBirthField']} id="dayOfBirth" defaultValue="day" >
-                                    <option value="day">День</option>
+                                <select className={st['settings__dayOfBirthField']} id="dayOfBirth" name='dayOfBirth' defaultValue="default" onChange={(e) => handleSettingsInput(e, 'userDay')} value={userDay}>
+                                    <option value="default">День</option>
+                                    <option value="01">01</option>
+                                    <option value="02">02</option>
+                                    <option value="03">03</option>
+                                    <option value="04">04</option>
                                 </select>
-                                <select className={st['settings__monthOfBirthField']} placeholder='Месяц' defaultValue="month" >
-                                    <option value="month">Месяц</option>
-                                    <option value="january">Январь</option>
+                                <select className={st['settings__monthOfBirthField']} name="monthOfBirth" defaultValue="default" onChange={(e) => handleSettingsInput(e, 'userMonth')} value={userMonth}>
+                                    <option value="default">Месяц</option>
+                                    <option value="01">Январь</option>
+                                    <option value="02">Февраль</option>
+                                    <option value="03">Март</option>
+                                    <option value="04">Апрель</option>
                                 </select>
-                                <select className={st['settings__yearOfBirthField']} placeholder='Год' defaultValue="year" >
-                                    <option value="year">Год</option>
+                                <select className={st['settings__yearOfBirthField']} name="yearOfBirth" defaultValue="default" onChange={(e) => handleSettingsInput(e, 'userYear')} value={userYear}>
+                                    <option value="default">Год</option>
+                                    <option value="2003">2003</option>
+                                    <option value="2002">2002</option>
+                                    <option value="2000">2000</option>
                                 </select>
                             </div>
                         </div>
@@ -85,8 +163,9 @@ export const Settings:FC<ISettingsProps> = ({getEndpoints}) => {
                         <div className={st['settings__generalInfoField']}>
                             <label htmlFor="timezone" className={st['settings__label']}>Часовой пояс</label>
                             <div className={st['settings__fields']}>
-                                <select className={st['settings__timezoneField']} id="timezone">
-                                    <option value="ekb">(GMT+5) Екатеринбург</option>
+                                <select className={st['settings__timezoneField']} name="timezone" id="timezone" onChange={(e) => handleSettingsInput(e, 'userTimezone')} value={userTimezone} defaultValue="Выберите часовой пояс">
+                                    <option value="default">Выберите часовой пояс</option>
+                                    <option value="+5">(GMT+5) Екатеринбург</option>
                                 </select>
                             </div>
                         </div>
@@ -95,24 +174,24 @@ export const Settings:FC<ISettingsProps> = ({getEndpoints}) => {
                         <div className={st['settings__generalInfoField']}>
                             <label htmlFor="aboutMentee" className={st['settings__label']}>Обо мне <span>(как менти)</span></label>
                             <div className={st['settings__fields']}>
-                                <textarea name="" id="aboutMentee" className={st['settings__aboutMenteeField']} placeholder='Расскажите немного о себе'></textarea>
+                                <textarea name="descriptionMentee" id="aboutMentee" className={st['settings__aboutMenteeField']} placeholder='Расскажите немного о себе' onChange={(e) => handleSettingsInput(e, 'userDesc')} value={userDesc}></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className={st['settings__section']}>
+                <div className={st['settings__section']} id="accountSettings" data-name="settingsSection">
                     <h3 className={st['settings__title']}>Настройки аккаунта</h3>
                     <div className={st['settings__accountInfo']}>
                         <label htmlFor="email" className={st['settings__label']}>Email</label>
                         <div className={st['settings__fields']}>
-                            <input type="email" name="" id="email" className={st['settings__emailField']} placeholder='Адрес электронной почты' />
+                            <input type="email" name="email" id="email" className={st['settings__emailField']} placeholder='Адрес электронной почты' onChange={(e) => handleSettingsInput(e, 'userEmail')} value={userEmail}/>
                             <button className={st['settings__confirmFieldBtn']}>Подтвердить</button>
                         </div>
                     </div>
                     <div className={st['settings__accountInfo']}>
                         <label htmlFor="phoneNumber" className={st['settings__label']}>Телефон</label>
                         <div className={st['settings__fields']}>
-                            <input type="tel" name="" id="phoneNumber" className={st['settings__phoneField']} placeholder='Телефон' />
+                            <input type="tel" name="phoneNumber" id="phoneNumber" className={st['settings__phoneField']} placeholder='Телефон' onChange={(e) => handleSettingsInput(e, 'userPhone')} value={userPhone}/>
                             <button className={`${st['settings__confirmFieldBtn']} ${st['settings__confirmFieldBtn_confirmed']}`}>Подтверждён</button>
                         </div>
                     </div>
@@ -129,7 +208,7 @@ export const Settings:FC<ISettingsProps> = ({getEndpoints}) => {
                         </div>
                     </div>
                 </div>
-                <div className={st['settings__section']}>
+                <div className={st['settings__section']} id="notifications" data-name="settingsSection">
                     <h3 className={st['settings__title']}>Уведомления</h3>
                     <div className={st['settings__notificationsInfo']}>
                         <label htmlFor="" className={st['settings__label']}>Браузер</label>
@@ -179,7 +258,7 @@ export const Settings:FC<ISettingsProps> = ({getEndpoints}) => {
                         </div>
                     </div>
                 </div>
-                <div className={st['settings__section']}>
+                <div className={st['settings__section']} id="communication" data-name="settingsSection">
                     <h3 className={st['settings__title']}>Способ коммуникации</h3>
                     <div className={st['settings__communication']}>
                         <label htmlFor="skypeId" className={st['settings__label']}>Skype</label>
@@ -197,7 +276,7 @@ export const Settings:FC<ISettingsProps> = ({getEndpoints}) => {
                     </div>
                     <button className={st['settings__addNewWayOf']}>+ Добавить новый способ связи</button>
                 </div>
-                <div className={st['settings__section']}>
+                <div className={st['settings__section']} id="payment" data-name="settingsSection">
                     <h3 className={st['settings__title']}>Кошелёк</h3>
                     <div className={st['settings__wallet']}>
                         <label htmlFor="browser" className={st['settings__label']}>Кредитная карта</label>
@@ -223,12 +302,12 @@ export const Settings:FC<ISettingsProps> = ({getEndpoints}) => {
                     <div className={st['settings__wallet']}>
                         <label htmlFor="" className={st['settings__label']}>Состояние счета</label>
                         <div className={st['settings__fields']}>
-                            <span className={st['settings__amountOfMoney']}>1025,00 рублей</span>
+                            <span className={st['settings__amountOfMoney']}>{userBalance},00 рублей</span>
                         </div>
                     </div>
                     <button className={st['settings__addNewWayOf']}>+ Добавить новый способ оплаты</button>
                 </div>
-                <div className={st['settings__section']}>
+                <div className={st['settings__section']} id="mentorSettings" data-name="settingsSection">
                     <h3 className={st['settings__title']}>Настройки ментора</h3>
                     <div className={st['settings__mentor']}>
                         <label htmlFor="" className={st['settings__label']}>Текущий статус</label>
