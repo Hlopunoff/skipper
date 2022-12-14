@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/skipper/static/css/main.ef5f94b1.css",
+    "main.js": "/skipper/static/js/main.56d9576e.js",
+    "static/media/login_bg.png": "/skipper/static/media/login_bg.426b47a3968a19d3b121.png",
+    "static/media/Montserrat-SemiBold.ttf": "/skipper/static/media/Montserrat-SemiBold.d5e0cc788cba9ced1fb9.ttf",
+    "static/media/Montserrat-Medium.ttf": "/skipper/static/media/Montserrat-Medium.c86e3b9010ff63c99166.ttf",
+    "static/media/Montserrat-Bold.ttf": "/skipper/static/media/Montserrat-Bold.2c155811b35513d5beaa.ttf",
+    "static/media/Montserrat-Light.ttf": "/skipper/static/media/Montserrat-Light.6fcc9263a21be961d246.ttf",
+    "static/media/Montserrat-Regular.ttf": "/skipper/static/media/Montserrat-Regular.ceb11275ab638627a643.ttf",
+    "static/media/IBMPlexSans-Medium.ttf": "/skipper/static/media/IBMPlexSans-Medium.56fb541cbbc5462f1c33.ttf",
+    "static/media/IBMPlexSans-Regular.ttf": "/skipper/static/media/IBMPlexSans-Regular.d77342fdcbcb6b3ce1b5.ttf",
+    "static/media/IBMPlexSans-Bold.ttf": "/skipper/static/media/IBMPlexSans-Bold.e933eba4e2fcc3d71b31.ttf",
+    "static/media/certificate.png": "/skipper/static/media/certificate.acca0ce3d4e7718d582d.png",
+    "static/media/mentor_profile.png": "/skipper/static/media/mentor_profile.b6864b6e59d2123f993e.png",
+    "static/media/error_gif.gif": "/skipper/static/media/error_gif.57e580541074e364dd1c.gif",
+    "static/media/icons.woff?t38lgt": "/skipper/static/media/icons.da797a9952ab6fe37b7b.woff",
+    "static/media/icons.ttf?t38lgt": "/skipper/static/media/icons.b83cf13fb1977d11a5ec.ttf",
+    "static/media/star.svg": "/skipper/static/media/star.a367b412feb0160ca3976f52e317c422.svg",
+    "index.html": "/skipper/index.html",
+    "static/media/heart.svg": "/skipper/static/media/heart.7bd5d223bceae4e88e9710b6fb4bd350.svg",
+    "main.ef5f94b1.css.map": "/skipper/static/css/main.ef5f94b1.css.map",
+    "main.56d9576e.js.map": "/skipper/static/js/main.56d9576e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ef5f94b1.css",
+    "static/js/main.56d9576e.js"
+  ]
+}
