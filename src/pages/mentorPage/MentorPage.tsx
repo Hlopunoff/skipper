@@ -10,6 +10,7 @@ import { Consultation } from '../../components/consultation/Consultation';
 import { Schedule } from '../../components/schedule/Schedule';
 import { Modal } from '../../components/modal/Modal';
 import { CreateReview } from '../../components/createReview/CreateReview';
+import { MenteeInterests } from '../../components/menteeInterests/MenteeInterests';
 
 import st from './mentorPage.module.scss';
 
@@ -25,6 +26,7 @@ export const MentorPage = () => {
                     <div className={st['mentorPage__content']}>
                         <div className={st['mentorPage__info']}>
                             <MentorCard />
+                            <MenteeInterests />
                             <LessonsStats width='100%' padding='30px 42px 0px 26px' relatedTo='mentor'/>
                             <PriceList />
                             <MentorResume />

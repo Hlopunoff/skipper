@@ -12,7 +12,6 @@ interface IUserAuthInfo {
     email?: string;
     password: string;
     phoneNumber?: string;
-    username: string;
 }
 
 interface IMenteeGetInfo {

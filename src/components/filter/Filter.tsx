@@ -1,4 +1,6 @@
-import {useState, useRef} from 'react';
+import {useState} from 'react';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux';
+import { setFilters } from '../../store/slices/filterSlice';
 import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 
@@ -18,9 +20,11 @@ const RatingSlider = styled(Slider)(() => ({
 }));
 
 export const Filter = () => {
+    const dispatch = useAppDispatch();
+    const {category, tags: recievedTags} = useAppSelector(state => state.filter.filter.filters);
     const [rating, setRating] = useState<number[]>([2,4]);
-    const [priceRage, setPriceRange] = useState('');
-    const [tags, setTags] = useState<(string | null)[]>([]);
+    const [[minPrice, maxPrice], setPriceRange] = useState<number[]>([0, 0]);
+    const [tags, setTags] = useState<(string | null)[]>(['javascript']);
 
     const ratingSliderHandler = (e: Event, newValue: number | number[]) => {
         setRating(newValue as number[]);
@@ -39,13 +43,12 @@ export const Filter = () => {
             });
 
             (currentTarget.firstChild as HTMLInputElement).checked = true;
-            setPriceRange((currentTarget.firstChild as HTMLInputElement).value);
+            setPriceRange((currentTarget.firstChild as HTMLInputElement).value.split('-').map(num => +num));
         }
     };
 
     const selectTags:React.MouseEventHandler<HTMLUListElement>= (e) => {
         const target = e.target;
-        const currentTarget = e.currentTarget;
 
         if (target && (target as HTMLElement).tagName === 'LABEL' && (target as HTMLElement).getAttribute('data-tag_value')) {
             if (((target as HTMLLabelElement).previousElementSibling as HTMLInputElement).checked) {
@@ -54,7 +57,6 @@ export const Filter = () => {
                 setTags((prev => [...new Set([...prev, (target as HTMLLabelElement).textContent])]));
             }
         }
-        console.log(tags);
     };
 
     return (
@@ -63,23 +65,23 @@ export const Filter = () => {
                 <h2 className={st['filter__pricesTitle']}>Стоимость часа консультации</h2>
                 <ul className={st['filter__pricesList']}>
                     <li className={st['filter__price']} onClick={selectPriceRange}>
-                        <input type="radio" name="upToFive" id="upToFive" className={st['filter__checkbox']} value="lessThanFive"/>
+                        <input type="radio" name="upToFive" id="upToFive" className={st['filter__checkbox']} value="0-5"/>
                         <label htmlFor="upToFive" className={st['filter__checkboxLabel']}>до $5</label>
                     </li>
                     <li className={st['filter__price']} onClick={selectPriceRange}>
-                        <input type="radio" name="fiveToTen" id="fiveToTen" className={st['filter__checkbox']} value="fiveToTen"/>
+                        <input type="radio" name="fiveToTen" id="fiveToTen" className={st['filter__checkbox']} value="5-10"/>
                         <label htmlFor="fiveToTen" className={st['filter__checkboxLabel']}>$5-$10</label>
                     </li>
                     <li className={st['filter__price']} onClick={selectPriceRange}>
-                        <input type="radio" name="tenToOneFifty" id="tenToOneFifty" className={st['filter__checkbox']} value="tenToOneFifty"/>
+                        <input type="radio" name="tenToOneFifty" id="tenToOneFifty" className={st['filter__checkbox']} value="10-150"/>
                         <label htmlFor="tenToOneFifty" className={st['filter__checkboxLabel']}>$10-$150</label>
                     </li>
                     <li className={st['filter__price']} onClick={selectPriceRange}>
-                        <input type="radio" name="moreThanFiveHundred" id="moreThanFiveHundred" className={st['filter__checkbox']} value="moreThanFiveHundred"/>
+                        <input type="radio" name="moreThanFiveHundred" id="moreThanFiveHundred" className={st['filter__checkbox']} value="500-1000000"/>
                         <label htmlFor="moreThanFiveHundred" className={st['filter__checkboxLabel']}>больше $500</label>
                     </li>
                     <li className={st['filter__price']} onClick={selectPriceRange}>
-                        <input type="radio" name="all" id="all" className={st['filter__checkbox']} value="all"/>
+                        <input type="radio" name="all" id="all" className={st['filter__checkbox']} value="0-1000000"/>
                         <label htmlFor="all" className={st['filter__checkboxLabel']}>All</label>
                     </li>
                 </ul>
@@ -99,7 +101,16 @@ export const Filter = () => {
             <div className={st['filter__tags']}>
                 <h2 className={st['filter__tagsTitle']}>Теги</h2>
                 <ul className={st['filter__tagsList']} onClick={selectTags}>
-                    <li className={st['filter__tag']}>
+                    {recievedTags.length ? recievedTags.map(tag => {
+                        return (
+                            <li className={st['filter__tag']} key={tag}>
+                                <input type="checkbox" name="" id="taxPaymentsTag" className={st['filter__tagInput']} />
+                                <label htmlFor="taxPaymentsTag" className={st['filter__tagName']} data-tag_value>{tag}</label>
+                                <label htmlFor="taxPaymentsTag" className={st['filter__tagAmount']}>1920</label>
+                            </li>
+                        );
+                    }) : <span>Нет тегов</span>}
+                    {/* <li className={st['filter__tag']}>
                         <input type="checkbox" name="" id="taxPaymentsTag" className={st['filter__tagInput']} />
                         <label htmlFor="taxPaymentsTag" className={st['filter__tagName']} data-tag_value>Налоговые выплаты</label>
                         <label htmlFor="taxPaymentsTag" className={st['filter__tagAmount']}>1920</label>
@@ -148,10 +159,33 @@ export const Filter = () => {
                         <input type="checkbox" name="" id="kickbacksTag" className={st['filter__tagInput']} />
                         <label htmlFor="kickbacksTag" className={st['filter__tagName']} data-tag_value>Откаты</label>
                         <label htmlFor="kickbacksTag" className={st['filter__tagAmount']}>10</label>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
-            <button className={st['filter__apply']}>Применить фильтры</button>
+            <button className={st['filter__apply']} onClick={(e) => {
+                console.log(category, minPrice, maxPrice, rating[0], rating[1], tags);
+                dispatch(setFilters(
+                    {
+                filters: {
+                    category,
+                    maxPrice,
+                    minPrice,
+                    tags,
+                    minRating: rating[0],
+                    maxRating: rating[1],
+                },
+                pageable: {
+                    size: 5,
+                    page: 0
+                }
+                }));
+                    const disableBtn = setTimeout(() => {
+                        e.currentTarget.disabled = true;
+                    }, 0);
+
+                    clearTimeout(disableBtn);
+                    e.currentTarget.disabled = false;
+                }}>Применить фильтры</button>
         </section>
     );
 };

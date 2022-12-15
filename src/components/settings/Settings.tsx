@@ -37,13 +37,13 @@ export const Settings:FC<ISettingsProps> = ({setSettings}) => {
 
     const collectData = () => {
         const data:IUserSettings = {
-            username: `${username} ${usersurname} ${userpatronymic}`,
+            username: `${username.trim()} ${usersurname.trim()} ${userpatronymic.trim()}`,
             birthdate: `${userDay}-${userMonth}-${userYear}`,
             balance: +userBalance,
             timeZone: `${userTimezone}`,
-            email: `${userEmail}`,
-            description: `${userDesc}`,
-            phoneNumber: `${userPhone || menteeInfo?.sub}`,
+            email: `${userEmail.trim()}`,
+            description: `${userDesc.trim()}`,
+            phoneNumber: `${userPhone.trim() || menteeInfo?.sub?.trim()}`,
             id,
         }
 

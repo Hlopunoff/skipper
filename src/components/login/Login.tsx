@@ -34,7 +34,7 @@ export const LoginWithEmail = () => {
             </div>
             <button type="submit" className={st['form__submit']} onClick={(e) => {
                 e.preventDefault();
-                dispatch(authUser({username: email, password}));
+                dispatch(authUser({email: email, password}));
             }}>Войти</button>
             <Link to="register" className={st['form__register']}>Зарегистрироваться</Link>
             <div className={st['form__icons']}>
@@ -76,7 +76,7 @@ export const LoginWithPhone = () => {
             </div>
             <button type="submit" className={st['login__submit']} onClick={(e) => {
                 e.preventDefault();
-                dispatch(authUser({username: `+7${phoneNumber}`, password}))
+                dispatch(authUser({phoneNumber: `+7${phoneNumber}`, password}))
                 .then(() => navigate('/'));
             }}>Войти</button>
             <Link to="/auth/register" className={st['login__register']}>зарегистрироваться</Link>

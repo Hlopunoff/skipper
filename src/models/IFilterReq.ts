@@ -5,11 +5,10 @@ export interface IFilterReq {
         maxPrice: number;
         minRating: number;
         maxRating: number;
-        tags: string[];
+        tags: (string | null)[];
     };
     pageable: {
         page: number;
         size: number;
-        sort: string[];
     };
 }

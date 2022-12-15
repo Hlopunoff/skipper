@@ -1,3 +1,6 @@
+import { useAppDispatch } from '../../hooks/redux';
+import { setCategory, getTags } from '../../store/slices/filterSlice';
+
 import { Logo } from '../../UI/logo/Logo';
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
@@ -15,6 +18,7 @@ import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import st from './sideBar.module.scss';
 
 export const SideBar = () => {
+    const dispatch = useAppDispatch();
 
     const showSubList: React.MouseEventHandler<HTMLElement> = (e) => {
         const currentTarget = e.currentTarget as HTMLLIElement;
@@ -32,19 +36,37 @@ export const SideBar = () => {
         }
     };
 
+    const getSphere:React.MouseEventHandler<HTMLDivElement> = (e) => {
+        const target = e.target;
+        if(target && (target as HTMLElement).tagName === 'SPAN') {
+            dispatch(setCategory((target as HTMLSpanElement).getAttribute('data-category')));
+        }
+    };
+
+    const handleCategory: React.MouseEventHandler<HTMLLIElement> = (e) => {
+        const currTarget = e.currentTarget;
+
+        if(currTarget) {
+            dispatch(getTags(currTarget.querySelector('span[data-category]')?.getAttribute('data-category') as string));
+        }
+    };
+
     return (
         <aside className={st['sidebar']}>
             <Logo loc='sidebar'/>
-            <div className={st['sidebar__content']}>
+            <div className={st['sidebar__content']} onClick={getSphere}>
                 <div className={st['sidebar__sphere']}>
                     <h3 className={st['sidebar__subtitle']}>IT и технологии</h3>
                     <ul className={st['sidebar__list']}>
-                        <li className={st['item']} onClick={showSubList}>
+                        <li className={st['item']} onClick={(e) => {
+                            showSubList(e);
+                            handleCategory(e);
+                        }}>
                             <div className={st['item__wrap']}>
                                 <div className={st['item__logo']}>
                                     <TableChartOutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
                                 </div>
-                                <span className={st['item__title']}>Программирование</span>
+                                <span className={st['item__title']} data-category="programming">Программирование</span>
                                 <div className={st['item__dropdown']}>
                                     <KeyboardArrowRightOutlinedIcon sx={{ width: '20px', height: '20px', lineHeight: '20px' }} />
                                 </div>
@@ -61,12 +83,12 @@ export const SideBar = () => {
                                 </li>
                             </ul>
                         </li>
-                        <li className={st['item']}>
+                        <li className={st['item']} onClick={handleCategory}>
                             <div className={st['item__wrap']}>
                                 <div className={st['item__logo']}>
                                     <InvertColorsOutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
                                 </div>
-                                <span className={st['item__title']}>Тестирование</span>
+                                <span className={st['item__title']} data-category="testing">Тестирование</span>
                             </div>
                         </li>
                         <li className={st['item']} onClick={showSubList}>
@@ -124,14 +146,17 @@ export const SideBar = () => {
                     </ul>
                 </div>
                 <div className={st['sidebar__sphere']}>
-                    <h3 className={st['sidebar__subtitle']}>Финансы и расчеты</h3>
+                    <h3 className={st['sidebar__subtitle']}>Кулинария</h3>
                     <ul className={st['sidebar__list']}>
-                        <li className={st['item']} onClick={showSubList}>
+                        <li className={st['item']} onClick={(e) => {
+                            showSubList(e);
+                            handleCategory(e);
+                        }}>
                             <div className={st['item__wrap']}>
                                 <div className={st['item__logo']}>
                                     <ContentCopyOutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
                                 </div>
-                                <span className={st['item__title']}>Бухгалтерия</span>
+                                <span className={st['item__title']} data-category="cooking">Приготовление блюд</span>
                                 <div className={st['item__dropdown']}>
                                     <KeyboardArrowRightOutlinedIcon sx={{ width: '20px', height: '20px', lineHeight: '20px' }} />
                                 </div>
