@@ -12,11 +12,38 @@ export const Register = () => {
     const dispatch = useAppDispatch();
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
+    const getInputNumbersValue = (input: HTMLInputElement) => input.value.replace(/\D/g, '');
 
     const fieldHandler = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
         const target = e.target;
         if(field === 'phoneNumber') {
-            setPhoneNumber(target.value);
+            let inputNumbersValue = getInputNumbersValue(target);
+            let formattedInputValue = '';
+
+            if (!inputNumbersValue) {
+                setPhoneNumber("");
+                return target.value = "";
+            }
+
+            if (inputNumbersValue[0] === '9') {
+                if (inputNumbersValue.length > 0) {
+                    formattedInputValue += `(${inputNumbersValue.substring(0, 3)}`;
+                }
+                if (inputNumbersValue.length >= 4) {
+                    formattedInputValue += `) ${inputNumbersValue.substring(3, 6)}`;
+                }
+                if (inputNumbersValue.length >= 7) {
+                    formattedInputValue += `-${inputNumbersValue.substring(6, 8)}`;
+                }
+                if (inputNumbersValue.length >= 9) {
+                    formattedInputValue += `-${inputNumbersValue.substring(8, 10)}`;
+                }
+            } else {
+                setPhoneNumber("");
+                return target.value = "";
+            }
+
+            setPhoneNumber(formattedInputValue);
         } else {
             setPassword(target.value);
         }
@@ -27,7 +54,7 @@ export const Register = () => {
             <h2 className={st['register__title']}>Регистрация</h2>
             <div className={st['register__inputs']}>
                 <input type="number" className={st['register__region']}  placeholder='+7' readOnly/>
-                <input type="text" className={st['register__phone']} placeholder='Номер телефона' maxLength={10} value={phoneNumber} onChange={(e) => {
+                <input type="tel" className={st['register__phone']} placeholder='Номер телефона' maxLength={15} value={phoneNumber} onChange={(e) => {
                     fieldHandler(e, 'phoneNumber');
                 }}/>
                 <input type="password" className={st['register__pass']} placeholder='Password' value={password} onChange={(e) => {
@@ -42,7 +69,7 @@ export const Register = () => {
             <div className={st['register__forwarding']}>
                 <button className={st['register__register']} type="submit" onClick={(e) => {
                     e.preventDefault();
-                    dispatch(registerUser({phoneNumber: `+7${phoneNumber}`, password}))
+                    dispatch(registerUser({phoneNumber: `+7${phoneNumber.replace(/\D/g, '')}`, password}))
                     .then(() => navigate('/auth/login-phone'));
                 }}>Зарегистрироваться</button>
                 <Link to='/auth' className={st['register__login']}>Войти</Link>

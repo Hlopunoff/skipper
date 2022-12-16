@@ -83,4 +83,13 @@
         line-height: 23px;
         color: $main-color;
     }
+    &__userTime {
+        display: inline-block;
+        margin-top: 15px;
+        color: $main-color;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 14px;
+    }
 }

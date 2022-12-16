@@ -24,7 +24,7 @@ export const Filter = () => {
     const {category, tags: recievedTags} = useAppSelector(state => state.filter.filter.filters);
     const [rating, setRating] = useState<number[]>([2,4]);
     const [[minPrice, maxPrice], setPriceRange] = useState<number[]>([0, 0]);
-    const [tags, setTags] = useState<(string | null)[]>(['javascript']);
+    const [tags, setTags] = useState<(string | null)[]>([]);
 
     const ratingSliderHandler = (e: Event, newValue: number | number[]) => {
         setRating(newValue as number[]);
@@ -101,65 +101,15 @@ export const Filter = () => {
             <div className={st['filter__tags']}>
                 <h2 className={st['filter__tagsTitle']}>Теги</h2>
                 <ul className={st['filter__tagsList']} onClick={selectTags}>
-                    {recievedTags.length ? recievedTags.map(tag => {
+                    {recievedTags.length > 0 ? recievedTags.map(tag => {
                         return (
                             <li className={st['filter__tag']} key={tag}>
-                                <input type="checkbox" name="" id="taxPaymentsTag" className={st['filter__tagInput']} />
-                                <label htmlFor="taxPaymentsTag" className={st['filter__tagName']} data-tag_value>{tag}</label>
-                                <label htmlFor="taxPaymentsTag" className={st['filter__tagAmount']}>1920</label>
+                                <input type="checkbox" name="" id={tag} className={st['filter__tagInput']} />
+                                <label htmlFor={tag} className={st['filter__tagName']} data-tag_value>{tag}</label>
+                                <label htmlFor={tag} className={st['filter__tagAmount']}>1920</label>
                             </li>
                         );
                     }) : <span>Нет тегов</span>}
-                    {/* <li className={st['filter__tag']}>
-                        <input type="checkbox" name="" id="taxPaymentsTag" className={st['filter__tagInput']} />
-                        <label htmlFor="taxPaymentsTag" className={st['filter__tagName']} data-tag_value>Налоговые выплаты</label>
-                        <label htmlFor="taxPaymentsTag" className={st['filter__tagAmount']}>1920</label>
-                    </li>
-                    <li className={st['filter__tag']}>
-                        <input type="checkbox" name="" id="accountingReportTag" className={st['filter__tagInput']} />
-                        <label htmlFor="accountingReportTag" className={st['filter__tagName']} data-tag_value>Бух учет</label>
-                        <label htmlFor="accountingReportTag" className={st['filter__tagAmount']}>1820</label>
-                    </li>
-                    <li className={st['filter__tag']}>
-                        <input type="checkbox" name="" id="stateAnalyticsTag" className={st['filter__tagInput']} />
-                        <label htmlFor="stateAnalyticsTag" className={st['filter__tagName']} data-tag_value>Аналитика состояний</label>
-                        <label htmlFor="stateAnalyticsTag" className={st['filter__tagAmount']}>462</label>
-                    </li>
-                    <li className={st['filter__tag']}>
-                        <input type="checkbox" name="" id="reportTag" className={st['filter__tagInput']} />
-                        <label htmlFor="reportTag" className={st['filter__tagName']} data-tag_value>Отчетность</label>
-                        <label htmlFor="reportTag" className={st['filter__tagAmount']}>6556</label>
-                    </li>
-                    <li className={st['filter__tag']}>
-                        <input type="checkbox" name="" id="auditTag" className={st['filter__tagInput']} />
-                        <label htmlFor="audiTag" className={st['filter__tagName']} data-tag_value>Аудит</label>
-                        <label htmlFor="auditTag" className={st['filter__tagAmount']}>120</label>
-                    </li>
-                    <li className={st['filter__tag']}>
-                        <input type="checkbox" name="" id="consultationTag" className={st['filter__tagInput']} />
-                        <label htmlFor="consultationTag" className={st['filter__tagName']} data-tag_value>Консультации</label>
-                        <label htmlFor="consultationTag" className={st['filter__tagAmount']}>353</label>
-                    </li>
-                    <li className={st['filter__tag']}>
-                        <input type="checkbox" name="" id="fieldWorksTag" className={st['filter__tagInput']} />
-                        <label htmlFor="fieldWorksTag" className={st['filter__tagName']} data-tag_value>Выездные работы</label>
-                        <label htmlFor="fieldWorksTag" className={st['filter__tagAmount']}>45</label>
-                    </li>
-                    <li className={st['filter__tag']}>
-                        <input type="checkbox" name="" id="registrationTag" className={st['filter__tagInput']} />
-                        <label htmlFor="registrationTag" className={st['filter__tagName']} data-tag_value>Регистрация</label>
-                        <label htmlFor="registrationTag" className={st['filter__tagAmount']}>456</label>
-                    </li>
-                    <li className={st['filter__tag']}>
-                        <input type="checkbox" name="" id="annualPaddingTag" className={st['filter__tagInput']} />
-                        <label htmlFor="annualPaddingTag" className={st['filter__tagName']} data-tag_value>Годовая подбивка</label>
-                        <label htmlFor="annualPaddingTag" className={st['filter__tagAmount']}>55</label>
-                    </li>
-                    <li className={st['filter__tag']}>
-                        <input type="checkbox" name="" id="kickbacksTag" className={st['filter__tagInput']} />
-                        <label htmlFor="kickbacksTag" className={st['filter__tagName']} data-tag_value>Откаты</label>
-                        <label htmlFor="kickbacksTag" className={st['filter__tagAmount']}>10</label>
-                    </li> */}
                 </ul>
             </div>
             <button className={st['filter__apply']} onClick={(e) => {

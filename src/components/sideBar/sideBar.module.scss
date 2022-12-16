@@ -39,6 +39,9 @@
         color: $main-color;
         cursor: pointer;
         user-select: none;
+        &:hover, &:active {
+            color: #667BE9;
+        }
         &__title {
             display: block;
             width: 100%;
@@ -59,6 +62,7 @@
     }
     &__sublist {
         margin-top: 10px;
+        margin-left: 15px;
         list-style-type: none;
         display: none;
         &.sublist__item {
@@ -69,6 +73,9 @@
             color: $main-color;
             cursor: pointer;
             user-select: none;
+            &:hover {
+                color: #667BE9;
+            }
         }
     }
 }

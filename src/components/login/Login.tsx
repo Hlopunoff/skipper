@@ -53,10 +53,39 @@ export const LoginWithPhone = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
 
+    const getInputNumbersValue = (input: HTMLInputElement) => input.value.replace(/\D/g, '');
+
     const fieldHandler = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
         const target = e.target;
+
         if (field === 'phoneNumber') {
-            setPhoneNumber(target.value);
+            let inputNumbersValue = getInputNumbersValue(target);
+            let formattedInputValue = '';
+
+            if(!inputNumbersValue) {
+                setPhoneNumber("");
+                return target.value = "";
+            }
+
+            if(inputNumbersValue[0] === '9') {
+                if(inputNumbersValue.length > 0) {
+                    formattedInputValue += `(${inputNumbersValue.substring(0,3)}`;
+                }
+                if(inputNumbersValue.length >= 4) {
+                    formattedInputValue += `) ${inputNumbersValue.substring(3,6)}`;
+                }
+                if(inputNumbersValue.length >= 7) {
+                    formattedInputValue += `-${inputNumbersValue.substring(6,8)}`;
+                }
+                if(inputNumbersValue.length >= 9) {
+                    formattedInputValue += `-${inputNumbersValue.substring(8,10)}`;
+                }
+            } else {
+                setPhoneNumber("");
+                return target.value = "";
+            }
+
+            setPhoneNumber(formattedInputValue);
         } else {
             setPassword(target.value);
         }
@@ -66,7 +95,7 @@ export const LoginWithPhone = () => {
         <>
             <div className={st['login__inputs']}>
                 <input type="text" placeholder='+7' className={st['login__region']} readOnly/>
-                <input type="number" className={st['login__phone']} placeholder='Номер телефона' value={phoneNumber} maxLength={10} onChange={(e) => fieldHandler(e, 'phoneNumber')}/>
+                <input type="tel" className={st['login__phone']} placeholder='Номер телефона' value={phoneNumber} maxLength={15} onChange={(e) => fieldHandler(e, 'phoneNumber')}/>
                 <input type="password" className={st['login__pass']} placeholder='Password' value={password} onChange={(e) => fieldHandler(e, 'password')}/>
             </div>
             <div className={st['login__recovery']}>
@@ -76,7 +105,7 @@ export const LoginWithPhone = () => {
             </div>
             <button type="submit" className={st['login__submit']} onClick={(e) => {
                 e.preventDefault();
-                dispatch(authUser({phoneNumber: `+7${phoneNumber}`, password}))
+                dispatch(authUser({phoneNumber: `+7${phoneNumber.replace(/\D/g, '')}`, password}))
                 .then(() => navigate('/'));
             }}>Войти</button>
             <Link to="/auth/register" className={st['login__register']}>зарегистрироваться</Link>

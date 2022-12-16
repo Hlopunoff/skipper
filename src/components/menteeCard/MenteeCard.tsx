@@ -40,14 +40,14 @@ export const MenteeCard = () => {
                     <img src={mentee.userPicture || mentorImgPlug} alt="Фото ментора" className={st['menteeCard__img']} />
                 </div>
                 <div className={st['menteeCard__info']}>
-                    <h2 className={st['menteeCard__name']}>{mentee.username}</h2>
+                    <h2 className={st['menteeCard__name']}>{mentee?.username.startsWith('+7') ? `${mentee.username.slice(0, 2)} (${mentee.username.slice(2, 5)}) ${mentee.username.slice(5, 8)}-${mentee.username.slice(8, 10)}-${mentee.username.slice(10)}` : mentee?.username}</h2>
                     <span className={st['menteeCard__status']}>Онлайн <div className={st['indicator']}></div></span>
-                    <p className={st['menteeCard__specialty']}>{mentee.speciality}</p>
-                    <Rating sx={{ justifyContent: 'flex-start' }} rating={4.8}/>
+                    <p className={st['menteeCard__specialty']}>{mentee.speciality ? mentee.speciality : 'Данный пользователь еще не уточнил свою специальность'}</p>
                 </div>
             </div>
             <span className={st['menteeCard__date-from']}>На Skipper {mentee.registrationDate} года</span>
-            <p className={st['menteeCard__descr']}>{mentee.description && mentee.description.length > 100 ? mentee.description.slice(0, 101) : mentee.description}</p>
+            <p className={st['menteeCard__descr']}>{mentee.description ? mentee.description.length > 100 ? mentee.description.slice(0, 101) : mentee.description : 'Данный пользователь пока что не разместил о себе никакой дополнительной информации.'}</p>
+            <span className={st['menteeCard__userTime']}>Время пользователя {new Date().getHours().toString().length <= 1 ? '0' + new Date().getHours().toString() : new Date().getHours().toString()}:{new Date().getMinutes().toString().length <= 1 ? '0' + new Date().getMinutes().toString() : new Date().getMinutes().toString()} | GMT +{mentee.timezone}</span>
         </>
     ) : null;
 

@@ -31,7 +31,8 @@ const initialState: IInitial<IUser> = {
     isLoading: true,
     isError: '',
     user: {
-        accessToken: ''
+        accessToken: '',
+        isMentor: false,
     },
 };
 
@@ -73,11 +74,11 @@ export const authUser = createAsyncThunk(
             }
 
             const data = await res.json();
-            console.log(jwtDecode<any>(data.accessToken));
             const result = {
                 accessToken: data.accessToken,
                 refreshToken: data.refreshToken,
                 mentee: jwtDecode<any>(data.accessToken),
+                isMentor: data.isMentor,
             };
 
             return result;

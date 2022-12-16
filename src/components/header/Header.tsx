@@ -36,7 +36,12 @@ export const Header:FC<IHeaderProps> = ({sx}) => {
     const dispatch = useAppDispatch();
     const searchFieldRef = useRef<HTMLInputElement>(null);
     const {isAuth, mentee} = useAuth();
-    const id = useAppSelector(state => state.user.user?.mentee?.userId);
+    const {id, isMentor} = useAppSelector(state => {
+        return {
+            id: state.user.user?.mentee?.userId,
+            isMentor: state.user.user?.isMentor,
+        };
+    });
 
     const showSearchField = () => {
         if(searchFieldRef.current) {
@@ -175,7 +180,7 @@ export const Header:FC<IHeaderProps> = ({sx}) => {
                                         <li className={st['profile-dropdown__item']}>
                                             <div className={st['profile-dropdown__info']}>
                                                 <CalendarTodayOutlinedIcon sx={{ gridRowStart: '1', gridRowEnd: '4', width: '24px', height: '25px' }} />
-                                                <Link to={`mentee/${id}`} className={st['profile-dropdown__name']}>Профиль</Link>
+                                                <Link to={isMentor ? `mentor/${id}` : `mentee/${id}`} className={st['profile-dropdown__name']}>Профиль</Link>
                                             </div>
                                         </li>
                                         <li className={st['profile-dropdown__item']}>

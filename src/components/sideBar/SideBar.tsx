@@ -8,7 +8,6 @@ import InvertColorsOutlinedIcon from '@mui/icons-material/InvertColorsOutlined';
 import CreditCardOutlinedIcon from '@mui/icons-material/CreditCardOutlined';
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
-import TaskAltOutlinedIcon from '@mui/icons-material/TaskAltOutlined';
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -16,6 +15,8 @@ import QueryBuilderOutlinedIcon from '@mui/icons-material/QueryBuilderOutlined';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
 import st from './sideBar.module.scss';
+
+const setCategoryTitle = (title: string) => title.length > 16 ? title.slice(0, 16) + '...' : title;
 
 export const SideBar = () => {
     const dispatch = useAppDispatch();
@@ -66,20 +67,20 @@ export const SideBar = () => {
                                 <div className={st['item__logo']}>
                                     <TableChartOutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
                                 </div>
-                                <span className={st['item__title']} data-category="programming">Программирование</span>
+                                <span className={st['item__title']} data-category="programming">{setCategoryTitle('Программирование')}</span>
                                 <div className={st['item__dropdown']}>
                                     <KeyboardArrowRightOutlinedIcon sx={{ width: '20px', height: '20px', lineHeight: '20px' }} />
                                 </div>
                             </div>
                             <ul className={st['sidebar__sublist']}>
                                 <li className={st['sublist__item']}>
-                                    Web программирование
+                                    {setCategoryTitle('Web программирование')}
                                 </li>
                                 <li className={st['sublist__item']}>
-                                    Data science
+                                    {setCategoryTitle('Data science')}
                                 </li>
                                 <li className={st['sublist__item']}>
-                                    Mobile
+                                    {setCategoryTitle('Mobile')}
                                 </li>
                             </ul>
                         </li>
@@ -88,10 +89,13 @@ export const SideBar = () => {
                                 <div className={st['item__logo']}>
                                     <InvertColorsOutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
                                 </div>
-                                <span className={st['item__title']} data-category="testing">Тестирование</span>
+                                <span className={st['item__title']} data-category="testing">{setCategoryTitle('Тестирование')}</span>
                             </div>
                         </li>
-                        <li className={st['item']} onClick={showSubList}>
+                        <li className={st['item']} onClick={(e) => {
+                            showSubList(e);
+                            handleCategory(e);
+                        }}>
                             <div className={st['item__wrap']}>
                                 <div className={st['item__logo']}>
                                     <CreditCardOutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
@@ -103,43 +107,46 @@ export const SideBar = () => {
                             </div>
                             <ul className={st['sidebar__sublist']}>
                                 <li className={st['sublist__item']}>
-                                    Web программирование
+                                    {setCategoryTitle('Web программирование')}
                                 </li>
                                 <li className={st['sublist__item']}>
-                                    Data science
+                                    {setCategoryTitle('Data science')}
                                 </li>
                                 <li className={st['sublist__item']}>
-                                    Mobile
+                                    {setCategoryTitle('Mobile')}
                                 </li>
                             </ul>
                         </li>
-                        <li className={st['item']}>
+                        <li className={st['item']} onClick={handleCategory}>
                             <div className={st['item__wrap']}>
                                 <div className={st['item__logo']}>
                                     <GridViewOutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
                                 </div>
-                                <span className={st['item__title']}>Аналитика</span>
+                                <span className={st['item__title']} data-category="analytics">{setCategoryTitle('Аналитика')}</span>
                             </div>
                         </li>
-                        <li className={st['item']} onClick={showSubList}>
+                        <li className={st['item']} onClick={(e) => {
+                            showSubList(e);
+                            handleCategory(e);
+                        }}>
                             <div className={st['item__wrap']}>
                                 <div className={st['item__logo']}>
                                     <Inventory2OutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
                                 </div>
-                                <span className={st['item__title']}>Администрирова...</span>
+                                <span className={st['item__title']} data-category="administrating">{setCategoryTitle('Администрирование')}</span>
                                 <div className={st['item__dropdown']}>
                                     <KeyboardArrowRightOutlinedIcon sx={{ width: '20px', height: '20px', lineHeight: '20px' }} />
                                 </div>
                             </div>
                             <ul className={st['sidebar__sublist']}>
                                 <li className={st['sublist__item']}>
-                                    Web программирование
+                                    {setCategoryTitle('Web программирование')}
                                 </li>
                                 <li className={st['sublist__item']}>
-                                    Data science
+                                    {setCategoryTitle('Data science')}
                                 </li>
                                 <li className={st['sublist__item']}>
-                                    Mobile
+                                    {setCategoryTitle('Mobile')}
                                 </li>
                             </ul>
                         </li>
@@ -156,45 +163,37 @@ export const SideBar = () => {
                                 <div className={st['item__logo']}>
                                     <ContentCopyOutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
                                 </div>
-                                <span className={st['item__title']} data-category="cooking">Приготовление блюд</span>
+                                <span className={st['item__title']} data-category="cooking">{setCategoryTitle('Приготовление блюд')}</span>
                                 <div className={st['item__dropdown']}>
                                     <KeyboardArrowRightOutlinedIcon sx={{ width: '20px', height: '20px', lineHeight: '20px' }} />
                                 </div>
                             </div>
                             <ul className={st['sidebar__sublist']}>
                                 <li className={st['sublist__item']}>
-                                    Web программирование
+                                    {setCategoryTitle('Web программирование')}
                                 </li>
                                 <li className={st['sublist__item']}>
-                                    Data science
+                                    {setCategoryTitle('Data science')}
                                 </li>
                                 <li className={st['sublist__item']}>
-                                    Mobile
+                                    {setCategoryTitle('Mobile')}
                                 </li>
                             </ul>
                         </li>
-                        <li className={st['item']}>
+                        <li className={st['item']} onClick={handleCategory}>
                             <div className={st['item__wrap']}>
                                 <div className={st['item__logo']}>
                                     <CreditCardOutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060', transform: 'rotate(-90deg)' }} />
                                 </div>
-                                <span className={st['item__title']}>Откаты</span>
+                                <span className={st['item__title']} data-category="confectionery">{setCategoryTitle('Кондитерское дело')}</span>
                             </div>
                         </li>
-                        <li className={st['item']}>
+                        <li className={st['item']} onClick={handleCategory}>
                             <div className={st['item__wrap']}>
                                 <div className={st['item__logo']}>
                                     <FeedOutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
                                 </div>
-                                <span className={st['item__title']}>Счетоводство</span>
-                            </div>
-                        </li>
-                        <li className={st['item']}>
-                            <div className={st['item__wrap']}>
-                                <div className={st['item__logo']}>
-                                    <TaskAltOutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
-                                </div>
-                                <span className={st['item__title']}>Налоги</span>
+                                <span className={st['item__title']} data-category="food-stylist">{setCategoryTitle('Фуд-стилист')}</span>
                             </div>
                         </li>
                     </ul>
@@ -202,55 +201,61 @@ export const SideBar = () => {
                 <div className={st['sidebar__sphere']}>
                     <h3 className={st['sidebar__subtitle']}>Юриспруденция</h3>
                     <ul className={st['sidebar__list']}>
-                        <li className={st['item']} onClick={showSubList}>
+                        <li className={st['item']} onClick={(e) => {
+                            showSubList(e);
+                            handleCategory(e);
+                        }}>
                             <div className={st['item__wrap']}>
                                 <div className={st['item__logo']}>
                                     <LockOutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
                                 </div>
-                                <span className={st['item__title']}>Жилищные вопро...</span>
+                                <span className={st['item__title']} data-category="housing-issues">{setCategoryTitle('Жилищные вопросы')}</span>
                                 <div className={st['item__dropdown']}>
                                     <KeyboardArrowRightOutlinedIcon sx={{ width: '20px', height: '20px', lineHeight: '20px' }} />
                                 </div>
                             </div>
                             <ul className={st['sidebar__sublist']}>
                                 <li className={st['sublist__item']}>
-                                    Web программирование
+                                    {setCategoryTitle('Web программирование')}
                                 </li>
                                 <li className={st['sublist__item']}>
-                                    Data science
+                                    {setCategoryTitle('Data science')}
                                 </li>
                                 <li className={st['sublist__item']}>
-                                    Mobile
+                                    {setCategoryTitle('Mobile')}
                                 </li>
                             </ul>
                         </li>
-                        <li className={st['item']}>
+                        <li className={st['item']} onClick={handleCategory}>
                             <div className={st['item__wrap']}>
                                 <div className={st['item__logo']}>
                                     <QueryBuilderOutlinedIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
                                 </div>
-                                <span className={st['item__title']}>Бытовые вопросы</span>
+                                <span className={st['item__title']} data-category="domesticIssues">{setCategoryTitle('Бытовые вопросы')}</span>
                             </div>
                         </li>
-                        <li className={st['item']} onClick={showSubList}>
+                        <li className={st['item']} onClick={(e) => {
+                            showSubList(e);
+                            handleCategory(e);
+                        }}>
                             <div className={st['item__wrap']}>
                                 <div className={st['item__logo']}>
                                     <WarningAmberIcon sx={{ width: '20px', height: '20px', color: '#606060' }} />
                                 </div>
-                                <span className={st['item__title']}>Тяжкие преступле...</span>
+                                <span className={st['item__title']} data-category="criminal">{setCategoryTitle('Тяжкие преступления')}</span>
                                 <div className={st['item__dropdown']}>
                                     <KeyboardArrowRightOutlinedIcon sx={{ width: '20px', height: '20px', lineHeight: '20px' }} />
                                 </div>
                             </div>
                             <ul className={st['sidebar__sublist']}>
                                 <li className={st['sublist__item']}>
-                                    Web программирование
+                                    {setCategoryTitle('Web программирование')}
                                 </li>
                                 <li className={st['sublist__item']}>
-                                    Data science
+                                    {setCategoryTitle('Data science')}
                                 </li>
                                 <li className={st['sublist__item']}>
-                                    Mobile
+                                    {setCategoryTitle('Mobile')}
                                 </li>
                             </ul>
                         </li>
