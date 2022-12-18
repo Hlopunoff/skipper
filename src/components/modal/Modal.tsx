@@ -1,8 +1,12 @@
 import {useRef, useEffect, useState, FC} from 'react';
+import { useParams } from 'react-router-dom';
+import {useAppSelector, useAppDispatch} from '../../hooks/redux';
+import { setBookingInfo, sendBookInfo } from '../../store/slices/bookingSlice';
 
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Snackbar from '@mui/material/Snackbar';
 import {TableTimeCol} from '../schedule/Schedule';
 
 import st from './modal.module.scss';
@@ -17,17 +21,18 @@ interface IModalProps {
     getModalRef: React.Dispatch<React.SetStateAction<React.RefObject<HTMLDivElement> | undefined>>;
 }
 
+export interface IPayload {
+    fieldType: string;
+    data: unknown;
+}
+
 interface IModalOptionProps {
     title: string;
     subtitle?: string;
     price?: number;
     getBookInfo?: React.Dispatch<React.SetStateAction<string[]>>;
-}
-
-interface ICurrentBookOptions {
-    title?: string;
-    subtitle?: string;
-    price?: string;
+    lessonLength?: string;
+    dispatchBookInfo: (info: IPayload) => void;
 }
 
 export const removeActiveClasses = (parent: HTMLElement | null) => {
@@ -39,6 +44,18 @@ export const removeActiveClasses = (parent: HTMLElement | null) => {
 };
 
 export const Modal:FC<IModalProps> = ({getModalRef}) => {
+    const dispatch = useAppDispatch();
+    const [succsessBooking, setSuccsessBooking] = useState(false);
+    const {id, username, bookingInfo} = useAppSelector(state => {
+        return {
+            id: state.user.user?.mentee?.userId,
+            username: state.user.user?.mentor?.username,
+            img: state.user.user?.mentor?.userPicture,
+            bookingInfo: state.booking.bookingInfo,
+        };
+    });
+    const {mentorId} = useParams();
+    const [open, setOpen] = useState(false);
     const [step, setStep] = useState(1);
     const [modalBookInfo, setModalBookInfo] = useState<string[]>([]);
     const modalRef= useRef<HTMLDivElement>(null);
@@ -113,10 +130,13 @@ export const Modal:FC<IModalProps> = ({getModalRef}) => {
 
     const displayBookInfo = () => {
         if(modalBookInfo.length) {
-            return modalBookInfo.map(info => {
+            return modalBookInfo.map((info, i) => {
+                if(i === 0) {
+                    return null;
+                }
                 return (
                     <>
-                        <span className={st['modal__vertical-divider']}></span>
+                        <div className={st['modal__vertical-divider']}></div>
                         <span className={st['modal__curr-info']}>{info}</span>
                     </>
                 );
@@ -129,11 +149,45 @@ export const Modal:FC<IModalProps> = ({getModalRef}) => {
         stepHandler(step);
 
         getModalRef(modalRef);
+        dispatch(setBookingInfo({fieldType: 'id', data: {menteeId: id, mentorId}}));
     }, []);
 
     useEffect(() => {
         displayArrowBack();
+        console.log(modalBookInfo);
     }, [step]);
+
+    const dispatchBookingInfo = (info: IPayload) => {
+        dispatch(setBookingInfo(info));
+    };
+
+    const bookLesson: React.MouseEventHandler<HTMLButtonElement> = () => {
+        console.log(JSON.stringify(bookingInfo));
+        if(mentorId) {
+            console.log(mentorId);
+            dispatch(sendBookInfo(mentorId))
+            .then(() => {
+                setSuccsessBooking(true);
+                setOpen(true);
+            })
+            .catch(() => {
+                setSuccsessBooking(false);
+                setOpen(true);
+            })
+            .finally(() => {
+                const tipClose = setTimeout(() => {
+                    setOpen(false);
+
+                    if (modalRef.current) {
+                        modalRef.current.classList.remove('modal_shown');
+                        document.querySelector('body')?.classList.remove('scrollbar_hidden');
+                    }
+
+                    clearTimeout(tipClose);
+                }, 2000);
+            });
+        }
+    }
 
     return (
         <div className={`${st['modal']}`} ref={modalRef} onClick={closeModal}>
@@ -147,9 +201,9 @@ export const Modal:FC<IModalProps> = ({getModalRef}) => {
                     <div className={st['step']}></div>
                 </div>
                 <div className={st['modal__options']} ref={firstScreenRef}>
-                    <LessonType title='Теоретическая консультация' subtitle='Решение профильных вопросов в устной форме' price={1250} key={1}/>
-                    <LessonType title='Практическое решение текущих проблем' subtitle='Решение профильных вопросов в устной форме' price={1370} key={2}/>
-                    <LessonType title='Решение “под ключ”' subtitle='Описание задачи с последующим онлайн-решением' price={1700} key={3}/>
+                    <LessonType title='Теоретическая консультация' subtitle='Решение профильных вопросов в устной форме' price={1250} key={1} getBookInfo={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
+                    <LessonType title='Практическое решение текущих проблем' subtitle='Решение профильных вопросов в устной форме' price={1370} key={2} getBookInfo={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
+                    <LessonType title='Решение “под ключ”' subtitle='Описание задачи с последующим онлайн-решением' price={1700} key={3} getBookInfo={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
                 </div>
                 <div className={st['modal__lessons']} ref={secondScreenRef}>
                     <div className={st['lessons__categories']}>
@@ -160,22 +214,22 @@ export const Modal:FC<IModalProps> = ({getModalRef}) => {
                     </div>
                     <div className={st['lessons__categories']}>
                         <div className={st['lessons__category']}>
-                            <LessonPack title='1 занятие' price={100} key={1} getBookInfo={setModalBookInfo}/>
+                            <LessonPack title='1 занятие' price={100} key={1} getBookInfo={setModalBookInfo} lessonLength='15' dispatchBookInfo={dispatchBookingInfo} />
                         </div>
                         <div className={st['lessons__category']}>
-                            <LessonPack title='1 занятие' price={700} key={1} getBookInfo={setModalBookInfo}/>
-                            <LessonPack title='3 занятия' price={1950} key={2} getBookInfo={setModalBookInfo}/>
-                            <LessonPack title='5 занятий' price={3250} key={3} getBookInfo={setModalBookInfo}/>
+                            <LessonPack title='1 занятие' price={700} key={1} getBookInfo={setModalBookInfo} lessonLength='30' dispatchBookInfo={dispatchBookingInfo}/>
+                            <LessonPack title='3 занятия' price={1950} key={2} getBookInfo={setModalBookInfo} lessonLength='30' dispatchBookInfo={dispatchBookingInfo}/>
+                            <LessonPack title='5 занятий' price={3250} key={3} getBookInfo={setModalBookInfo} lessonLength='30' dispatchBookInfo={dispatchBookingInfo}/>
                         </div>
                         <div className={st['lessons__category']}>
-                            <LessonPack title='1 занятие' price={1370} key={1}  getBookInfo={setModalBookInfo}/>
-                            <LessonPack title='3 занятия' price={3800} key={2}  getBookInfo={setModalBookInfo}/>
-                            <LessonPack title='5 занятий' price={600} key={3}  getBookInfo={setModalBookInfo}/>
+                            <LessonPack title='1 занятие' price={1370} key={1}  getBookInfo={setModalBookInfo} lessonLength='60' dispatchBookInfo={dispatchBookingInfo}/>
+                            <LessonPack title='3 занятия' price={3800} key={2}  getBookInfo={setModalBookInfo} lessonLength='60' dispatchBookInfo={dispatchBookingInfo}/>
+                            <LessonPack title='5 занятий' price={600} key={3}  getBookInfo={setModalBookInfo} lessonLength='60' dispatchBookInfo={dispatchBookingInfo}/>
                         </div>
                         <div className={st['lessons__category']}>
-                            <LessonPack title='1 занятие' price={200} key={1}  getBookInfo={setModalBookInfo}/>
-                            <LessonPack title='3 занятия' price={5800} key={2}  getBookInfo={setModalBookInfo}/>
-                            <LessonPack title='5 занятий' price={9400} key={3}  getBookInfo={setModalBookInfo}/>
+                            <LessonPack title='1 занятие' price={200} key={1}  getBookInfo={setModalBookInfo} lessonLength='90' dispatchBookInfo={dispatchBookingInfo}/>
+                            <LessonPack title='3 занятия' price={5800} key={2}  getBookInfo={setModalBookInfo} lessonLength='90' dispatchBookInfo={dispatchBookingInfo}/>
+                            <LessonPack title='5 занятий' price={9400} key={3}  getBookInfo={setModalBookInfo} lessonLength='90' dispatchBookInfo={dispatchBookingInfo}/>
                         </div>
                     </div>
                 </div>
@@ -204,22 +258,22 @@ export const Modal:FC<IModalProps> = ({getModalRef}) => {
                             <div className={st['table__day']}>ВС</div>
                         </div>
                         <div className={st['table__times']}>
-                            <TableTimeCol times={times} key={1} getCurrentTime={setModalBookInfo}/>
-                            <TableTimeCol times={times} key={2} getCurrentTime={setModalBookInfo}/>
-                            <TableTimeCol times={times} key={3} getCurrentTime={setModalBookInfo}/>
-                            <TableTimeCol times={times} key={4} getCurrentTime={setModalBookInfo}/>
-                            <TableTimeCol times={times} key={5} getCurrentTime={setModalBookInfo}/>
-                            <TableTimeCol times={times} key={6} getCurrentTime={setModalBookInfo}/>
-                            <TableTimeCol times={times} key={7} getCurrentTime={setModalBookInfo}/>
+                            <TableTimeCol times={times} key={1} getCurrentTime={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
+                            <TableTimeCol times={times} key={2} getCurrentTime={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
+                            <TableTimeCol times={times} key={3} getCurrentTime={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
+                            <TableTimeCol times={times} key={4} getCurrentTime={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
+                            <TableTimeCol times={times} key={5} getCurrentTime={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
+                            <TableTimeCol times={times} key={6} getCurrentTime={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
+                            <TableTimeCol times={times} key={7} getCurrentTime={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
                         </div>
                     </div>
                 </div>
                 <div className={st['modal__communication']} ref={fourthScreenRef}>
                     <div className={st['communication__wrap']}>
-                        <CommunicationMethod title='Skype' subtitle='Ваш ID: bolshoyPapochka93' key={1} getBookInfo={setModalBookInfo}/>
-                        <CommunicationMethod title='Skype' subtitle='Ваш ID: bolshoyPapochka93' key={2} getBookInfo={setModalBookInfo}/>
-                        <CommunicationMethod title='Skype' subtitle='Ваш ID: bolshoyPapochka93' key={3} getBookInfo={setModalBookInfo}/>
-                        <CommunicationMethod title='Skype' subtitle='Ваш ID: bolshoyPapochka93' key={4} getBookInfo={setModalBookInfo}/>
+                        <CommunicationMethod title='Skype' subtitle='Ваш ID: bolshoyPapochka93' key={1} getBookInfo={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
+                        <CommunicationMethod title='Skype' subtitle='Ваш ID: bolshoyPapochka93' key={2} getBookInfo={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
+                        <CommunicationMethod title='Skype' subtitle='Ваш ID: bolshoyPapochka93' key={3} getBookInfo={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
+                        <CommunicationMethod title='Skype' subtitle='Ваш ID: bolshoyPapochka93' key={4} getBookInfo={setModalBookInfo} dispatchBookInfo={dispatchBookingInfo}/>
                     </div>
                 </div>
                 <div className={st['modal__descr']}>
@@ -227,12 +281,12 @@ export const Modal:FC<IModalProps> = ({getModalRef}) => {
                         <div className={st['mentor__logo-wrap']}>
                             <img src={mentorLogoPlug} alt="Фото ментора" className={st['mentor__logo']} />
                         </div>
-                        <span className={st['mentor__username']}>Сергей Веснушкин</span>
+                        <span className={st['mentor__username']}>{username}</span>
                         <div className={st['modal__curr-info-wrap']}>
                             {displayBookInfo()}
                         </div>
                     </div>
-                    {step === 4 ? (<button className={st['modal__book']}>Забронировать</button>) : <button className={st['modal__next']} onClick={() => modalHandler('forward')}>Дальше</button>}
+                    {step === 4 ? (<button className={st['modal__book']} onClick={bookLesson}>Забронировать</button>) : <button className={st['modal__next']} onClick={() => modalHandler('forward')}>Дальше</button>}
                 </div>
                 <div className={st['modal__close']} onClick={closeModal}>
                     <CloseOutlinedIcon sx={{ color: '#AEAEAE', width: '30px', height: '30px'}}/>
@@ -241,16 +295,26 @@ export const Modal:FC<IModalProps> = ({getModalRef}) => {
                     <ArrowBackIosIcon sx={{color: '#AEAEAE', width: '30px', height: '30px'}}/>
                 </div>
             </div>
+            <Snackbar
+                open={open}
+                autoHideDuration={3000}
+                message={succsessBooking ? 'Урок забронирован' : 'Не получилось забронировать'}
+            />
         </div>
     );
 };
 
 
-const LessonType:FC<IModalOptionProps> = ({title, subtitle, price}) => {
+const LessonType:FC<IModalOptionProps> = ({title, subtitle, price, getBookInfo, dispatchBookInfo}) => {
     return (
         <div className={st['option']} onClick={(e) => {
             removeActiveClasses(e.currentTarget.parentElement);
             (e.currentTarget as HTMLDivElement).classList.add('modal_chosen');
+
+            if (getBookInfo) {
+                getBookInfo(prev => [...prev, title]);
+                dispatchBookInfo({fieldType: 'lessonType', data: title});
+            }
             }}>
             <div className={st['option__info']}>
                 <h4 className={st['option__title']}>{title}</h4>
@@ -261,14 +325,16 @@ const LessonType:FC<IModalOptionProps> = ({title, subtitle, price}) => {
     );
 };
 
-const LessonPack:FC<IModalOptionProps> = ({title, price, getBookInfo}) => {
+const LessonPack:FC<IModalOptionProps> = ({title, price, getBookInfo, lessonLength, dispatchBookInfo}) => {
     return (
         <div className={st['lessons__available']} onClick={(e) => {
             removeActiveClasses(e.currentTarget.parentElement);
             (e.currentTarget as HTMLDivElement).classList.add('modal_chosen');
 
             if(getBookInfo) {
-                getBookInfo(prev => [...prev, title]);
+                getBookInfo(prev => [...prev, `${title} по ${lessonLength}мин ${price}руб`]);
+                const [_, duration, cost] = `${title} по ${lessonLength}мин ${price}руб`.split(' ').map((item) => item.replace(/\D/g, '')).filter((item) => item);
+                dispatchBookInfo({ fieldType: 'lessonDetails', data: {duration: +duration, cost: +cost}});
             }
             }}>
             <span className="lessons__amountOfLessons">{title}</span>
@@ -277,14 +343,15 @@ const LessonPack:FC<IModalOptionProps> = ({title, price, getBookInfo}) => {
     );
 };
 
-const CommunicationMethod:FC<IModalOptionProps> = ({title, subtitle, getBookInfo}) => {
+const CommunicationMethod:FC<IModalOptionProps> = ({title, subtitle, getBookInfo, dispatchBookInfo}) => {
     return (
         <div className={st['communication__way']} onClick={e => {
             removeActiveClasses(e.currentTarget.parentElement);
             (e.currentTarget as HTMLDivElement).classList.add('modal_chosen');
 
             if (getBookInfo) {
-                getBookInfo(prev => [...prev, title]);
+                getBookInfo(prev => [...prev, `${title}\n${subtitle}`]);
+                dispatchBookInfo({ fieldType: 'communication', data: subtitle ? subtitle.split('ID: ')[1] : '' });
             }
         }}>
             <div className={st['communication__info']}>

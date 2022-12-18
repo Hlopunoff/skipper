@@ -2,12 +2,14 @@ import {FC} from 'react';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { removeActiveClasses } from '../modal/Modal';
+import { IPayload } from '../modal/Modal';
 
 import st from './schedule.module.scss';
 
 interface ITableColProps {
     times: string[];
     getCurrentTime?: React.Dispatch<React.SetStateAction<string[]>>;
+    dispatchBookInfo?: (info: IPayload) => void;
 }
 
 //! DELETE LATER
@@ -54,7 +56,7 @@ export const Schedule = () => {
     )
 };
 
-export const TableTimeCol: FC<ITableColProps> = ({times, getCurrentTime}) => {
+export const TableTimeCol: FC<ITableColProps> = ({times, getCurrentTime, dispatchBookInfo}) => {
     return (
         <div className={st['table__col']}>
             {times.map(time => (<div 
@@ -66,6 +68,9 @@ export const TableTimeCol: FC<ITableColProps> = ({times, getCurrentTime}) => {
                         
                         if(getCurrentTime) {
                             getCurrentTime(prev => [...prev, time]);
+                            if(dispatchBookInfo) {
+                                dispatchBookInfo({ fieldType: 'time', data: new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString()});
+                            }
                         }
             }}>{time}</div>))}
         </div>

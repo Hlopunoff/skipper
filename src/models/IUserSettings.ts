@@ -4,8 +4,8 @@ import { IRole } from "./IRole";
 export interface IUserSettings {
     id?: number | string;
     phoneNumber?: string;
-    username: string;
-    description?: string 
+    username: string | undefined | null;
+    description?: string; 
     userPicture?: string;
     email?: string;
     balance?: number;

@@ -37,8 +37,8 @@ export const Settings:FC<ISettingsProps> = ({setSettings}) => {
 
     const collectData = () => {
         const data:IUserSettings = {
-            username: `${username.trim()} ${usersurname.trim()} ${userpatronymic.trim()}`,
-            birthdate: `${userDay}-${userMonth}-${userYear}`,
+            username: username ? `${username.trim()} ${usersurname.trim()} ${userpatronymic.trim()}` : menteeInfo?.username || menteeInfo?.sub,
+            birthdate: new Date(+userYear, +userMonth - 1, +userDay - 1).toISOString(),
             balance: +userBalance,
             timeZone: `${userTimezone}`,
             email: `${userEmail.trim()}`,
@@ -138,17 +138,17 @@ export const Settings:FC<ISettingsProps> = ({setSettings}) => {
                             <div className={st['settings__fields']}>
                                 <select className={st['settings__dayOfBirthField']} id="dayOfBirth" name='dayOfBirth' defaultValue="default" onChange={(e) => handleSettingsInput(e, 'userDay')} value={userDay}>
                                     <option value="default">День</option>
-                                    <option value="01">01</option>
-                                    <option value="02">02</option>
-                                    <option value="03">03</option>
-                                    <option value="04">04</option>
+                                    <option value="1">01</option>
+                                    <option value="2">02</option>
+                                    <option value="3">03</option>
+                                    <option value="4">04</option>
                                 </select>
                                 <select className={st['settings__monthOfBirthField']} name="monthOfBirth" defaultValue="default" onChange={(e) => handleSettingsInput(e, 'userMonth')} value={userMonth}>
                                     <option value="default">Месяц</option>
-                                    <option value="01">Январь</option>
-                                    <option value="02">Февраль</option>
-                                    <option value="03">Март</option>
-                                    <option value="04">Апрель</option>
+                                    <option value="1">Январь</option>
+                                    <option value="2">Февраль</option>
+                                    <option value="3">Март</option>
+                                    <option value="4">Апрель</option>
                                 </select>
                                 <select className={st['settings__yearOfBirthField']} name="yearOfBirth" defaultValue="default" onChange={(e) => handleSettingsInput(e, 'userYear')} value={userYear}>
                                     <option value="default">Год</option>

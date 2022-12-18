@@ -46,8 +46,8 @@ export const MenteeCard = () => {
                 </div>
             </div>
             <span className={st['menteeCard__date-from']}>На Skipper {mentee.registrationDate} года</span>
-            <p className={st['menteeCard__descr']}>{mentee.description ? mentee.description.length > 100 ? mentee.description.slice(0, 101) : mentee.description : 'Данный пользователь пока что не разместил о себе никакой дополнительной информации.'}</p>
-            <span className={st['menteeCard__userTime']}>Время пользователя {new Date().getHours().toString().length <= 1 ? '0' + new Date().getHours().toString() : new Date().getHours().toString()}:{new Date().getMinutes().toString().length <= 1 ? '0' + new Date().getMinutes().toString() : new Date().getMinutes().toString()} | GMT +{mentee.timezone}</span>
+            <p className={st['menteeCard__descr']}>{mentee.description ? mentee.description.length > 100 ? `${mentee.description.slice(0, 101)}...` : mentee.description : 'Данный пользователь пока что не разместил о себе никакой дополнительной информации.'}</p>
+            <span className={st['menteeCard__userTime']}>Время пользователя {new Date().getHours().toString().length <= 1 ? '0' + new Date().getHours().toString() : new Date().getHours().toString()}:{new Date().getMinutes().toString().length <= 1 ? '0' + new Date().getMinutes().toString() : new Date().getMinutes().toString()} | GMT {mentee.timezone ? `+${mentee.timezone}` : new Date().toString().split('GMT')[1].substring(0, 3).replace('0', '')}</span>
         </>
     ) : null;
 
