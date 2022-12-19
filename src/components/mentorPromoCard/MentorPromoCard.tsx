@@ -29,7 +29,7 @@ export const MentorPromoCard:FC<IMentorPromoProps> = ({img, name, specialty, des
             <div className={st['card__cla']}>
                 <div className={st['card__rating']} style={rating <= 3 ? ({ backgroundColor: '#ED5F5F' }) : rating > 4 ? ({ backgroundColor: '#7FC936' }) : ({ backgroundColor: '#E7D53B'})}>{rating}</div>
                 <div className={st['card__price']}>
-                    <span className={st['card__priceAmount']}>${price}</span>
+                    <span className={st['card__priceAmount']}>{price}&#8381;</span>
                     <span className={st['card__priceVariant']}>почасовая оплата</span>
                 </div>
                 <div className={st['card__btns']}>

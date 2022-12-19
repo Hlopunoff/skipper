@@ -66,19 +66,19 @@ export const Filter = () => {
                 <ul className={st['filter__pricesList']}>
                     <li className={st['filter__price']} onClick={selectPriceRange}>
                         <input type="radio" name="upToFive" id="upToFive" className={st['filter__checkbox']} value="0-5"/>
-                        <label htmlFor="upToFive" className={st['filter__checkboxLabel']}>до $5</label>
+                        <label htmlFor="upToFive" className={st['filter__checkboxLabel']}>до 300&#8381;</label>
                     </li>
                     <li className={st['filter__price']} onClick={selectPriceRange}>
                         <input type="radio" name="fiveToTen" id="fiveToTen" className={st['filter__checkbox']} value="5-10"/>
-                        <label htmlFor="fiveToTen" className={st['filter__checkboxLabel']}>$5-$10</label>
+                        <label htmlFor="fiveToTen" className={st['filter__checkboxLabel']}>300&#8381;-600&#8381;</label>
                     </li>
                     <li className={st['filter__price']} onClick={selectPriceRange}>
                         <input type="radio" name="tenToOneFifty" id="tenToOneFifty" className={st['filter__checkbox']} value="10-150"/>
-                        <label htmlFor="tenToOneFifty" className={st['filter__checkboxLabel']}>$10-$150</label>
+                        <label htmlFor="tenToOneFifty" className={st['filter__checkboxLabel']}>600&#8381;-9000&#8381;</label>
                     </li>
                     <li className={st['filter__price']} onClick={selectPriceRange}>
                         <input type="radio" name="moreThanFiveHundred" id="moreThanFiveHundred" className={st['filter__checkbox']} value="500-1000000"/>
-                        <label htmlFor="moreThanFiveHundred" className={st['filter__checkboxLabel']}>больше $500</label>
+                        <label htmlFor="moreThanFiveHundred" className={st['filter__checkboxLabel']}>больше 30000&#8381;</label>
                     </li>
                     <li className={st['filter__price']} onClick={selectPriceRange}>
                         <input type="radio" name="all" id="all" className={st['filter__checkbox']} value="0-1000000"/>
